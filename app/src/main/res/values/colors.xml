@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#3d4cb9</color>
+    <color name="titile1">#090909</color>
+    <color name="titile2">#737373</color>
+    <color name="titile3">#b2b2b2</color>
+    <color name="bg_gray">#efeff4</color>
+    <color name="bg_gray2">#efeff3</color>
+    <color name="top_color">#fafbfb</color>
+    <color name="no_order_color">#979798</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="night_bg">#181818</color>
+    <color name="night_gray">#585656</color>
+    <color name="night_text_normal">#898989</color>
+    <color name="wh_red">#D81D09</color>
+    <color name="hd_gray">#666666</color>
+    <color name="hd_text_gray">#999999</color>
+    <color name="night_text_read">#5c5c5c</color>
+    <color name="refreshLayout_title">#292929</color>
+    <color name="text_normal">#000000</color>
+    <color name="text_read">#595757</color>
+    <color name="lanmu_read">#a3a3a3</color>
+    <color name="line_gray">#d3d3d3</color>
+    <color name="text_light_gray">#777777</color>
+    <color name="green">#74b919</color>
+    <color name="green2">#5ABB68</color>
+    <color name="white">#FFFFFF</color>
+    <color name="darkgray">#555555</color>
+    <color name="dimgray">#888888</color>
+    <color name="black">#000000</color>
+    <color name="red">#AAFF0000</color>
+    <color name="divider">#dcdddd</color>
+    <color name="light_gray">#F2F2F3</color>
+    <color name="light_gray2">#E0E1E1</color>
+    <color name="blue">#29abe2</color>
+    <color name="gray">#363636</color>
+    <color name="lightgray">#efefef</color>
+    <color name="transparent">#00000000</color>
+    <color name="crouton_pink">#ffbcbc</color>
+    <color name="page_title_bg">#565656</color>
+    <color name="text_focus">#DD5825</color>
+    <color name="orange">#FF8040</color>
+    <color name="orange2">#FF9910</color>
+    <color name="line_color">#D3D3D3</color>
+    <color name="line_color2">#c4c4c4</color>
+    <color name="homepage_type">#555555</color>
+    <color name="content_line">#dbdede</color>
+    <color name="darkred">#d81d09</color>
+    <color name="lanmu_content_read">#BBBBBB</color>
+
+    <!-- Common -->
+    <color name="lc_bg_color">#efeff4</color>
+    <color name="lc_media_color">#000000</color>
+    <!-- Title -->
+    <color name="title_color_background">#FFFFFF</color>
+    <color name="title_color_divider">#CFCFCF</color>
+    <color name="title_color_center">#505166</color>
+
+    <color name="tab_text1">#272727</color>
+    <color name="search_background">#f1f1f2</color>
+
+
+    <color name="text_gray">#BABABA</color>
+</resources>

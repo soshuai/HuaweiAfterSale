@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:id="@+id/ll_act_progress_content"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/page_default_title_rl"
+        layout="@layout/widget_act_header"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/default_divider_height"
+        android:background="@color/divider" />
+
+    <include
+        layout="@layout/widget_act_loading"
+        android:background="@color/transparent" />
+
+</LinearLayout>
+
+</FrameLayout>

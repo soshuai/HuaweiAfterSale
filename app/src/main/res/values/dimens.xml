@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="interval_mininum">1dp</dimen>
+    <dimen name="interval_mini">3dp</dimen>
+    <dimen name="interval_tiny">5dp</dimen>
+    <dimen name="interval_small">8dp</dimen>
+    <dimen name="interval_smaller">12dp</dimen>
+    <dimen name="interval_default">15dp</dimen>
+    <dimen name="interval_larger">18dp</dimen>
+    <dimen name="interval_large">22dp</dimen>
+    <dimen name="interval_huge">25dp</dimen>
+    <dimen name="interval_great">30dp</dimen>
+    <dimen name="interval_maxinum">40dp</dimen>
+    <dimen name="interval_max_50">50dp</dimen>
+    <dimen name="interval_max_60">60dp</dimen>
+    <dimen name="interval_max_70">70dp</dimen>
+    <dimen name="interval_max_80">80dp</dimen>
+    <dimen name="interval_max_90">90dp</dimen>
+    <dimen name="interval_max_100">100dp</dimen>
+    <dimen name="interval_max_120">120dp</dimen>
+    <dimen name="interval_max_150">150dp</dimen>
+    <dimen name="interval_min_minus20">-20dp</dimen>
+    <dimen name="default_divider_height">1px</dimen>
+    <dimen name="topmenu_height">48dp</dimen>
+    <dimen name="cardRadius">10dp</dimen>
+    <dimen name="default_btn_height">40dp</dimen>
+    <dimen name="main_menu_bottom">10dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="text_size_big">30sp</dimen>
+
+    <dimen name="text_size_huge">24dp</dimen>
+    <dimen name="text_size_large">20dp</dimen>
+    <dimen name="text_size_large2">19dp</dimen>
+    <dimen name="text_size_larger">17dp</dimen>
+    <dimen name="text_size_default">15dp</dimen>
+    <dimen name="text_size_smaller">13sp</dimen>
+    <dimen name="text_size_middle">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+    <dimen name="text_size_tinyer">8sp</dimen>
+    <dimen name="text_size_tiny">6sp</dimen>
+
+    <dimen name="indicator_right_padding">10dp</dimen>
+    <dimen name="indicator_corner_radius">12dp</dimen>
+    <dimen name="indicator_internal_padding">4dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+
+    <!-- Title -->
+    <dimen name="common_divider_height">0.5dp</dimen>
+
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_smaller">14sp</dimen>
+    <dimen name="text_default">16sp</dimen>
+    <dimen name="text_big">18sp</dimen>
+    <dimen name="text_biger">20sp</dimen>
+    <dimen name="divider">1dp</dimen>
+    <dimen name="large_corner_round">10dp</dimen>
+
+</resources>

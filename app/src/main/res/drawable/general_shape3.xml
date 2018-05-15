@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"><!-- 其中rectagle表示矩形，oval表示椭圆，line表示水平直线，ring表示环形 -->
+
+    <stroke android:color="@color/line_color2"
+        android:width="@dimen/interval_mininum"/>
+    <solid android:color="@color/white"/>
+</shape>

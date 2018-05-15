@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/top_color" />
+
+    <cherish.cn.huaweiaftersale.view.ClearEditText
+        android:id="@+id/filter_edit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/interval_smaller"
+        android:layout_marginRight="@dimen/interval_smaller"
+        android:layout_marginTop="@dimen/interval_huge"
+        android:background="@drawable/search_bg"
+        android:drawableLeft="@drawable/search"
+        android:drawableRight="@drawable/search"
+        android:drawablePadding="@dimen/interval_smaller"
+        android:hint="请输入单号"
+        android:paddingLeft="@dimen/interval_default"
+        android:paddingRight="@dimen/interval_default"
+        android:singleLine="true"
+        android:textSize="15dp" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableFooterFollowWhenLoadFinished="true"
+        app:srlEnableScrollContentWhenLoaded="true">
+
+        <ListView
+            android:layout_marginBottom="@dimen/interval_small"
+            android:layout_marginLeft="@dimen/interval_smaller"
+            android:layout_marginRight="@dimen/interval_smaller"
+            android:layout_marginTop="@dimen/text_size_larger"
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:divider="@null"
+            android:fadeScrollbars="false"
+            android:scrollbars="none" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>
