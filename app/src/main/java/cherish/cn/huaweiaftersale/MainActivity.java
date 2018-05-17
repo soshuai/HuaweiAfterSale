@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import cherish.cn.huaweiaftersale.base.BaseActivity;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.base.BaseMultiFragsActivity;
@@ -15,7 +17,6 @@ import cherish.cn.huaweiaftersale.fragment.MineFragment;
 import cherish.cn.huaweiaftersale.fragment.OrderHandleFragment;
 import cherish.cn.huaweiaftersale.fragment.OrderSearchFragment;
 import cherish.cn.huaweiaftersale.util.DoubleClickExitHelper;
-import de.greenrobot.event.EventBus;
 
 public class MainActivity extends BaseMultiFragsActivity {
     private MainPagerTabContext mTabContext[];
@@ -25,7 +26,11 @@ public class MainActivity extends BaseMultiFragsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override

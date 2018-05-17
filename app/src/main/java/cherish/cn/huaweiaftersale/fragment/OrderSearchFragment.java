@@ -23,7 +23,6 @@ import cherish.cn.huaweiaftersale.adapter.SearchAdapter;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.bean.SearchBean;
 import cherish.cn.huaweiaftersale.bean.WorkBean;
-import de.greenrobot.event.EventBus;
 
 public class OrderSearchFragment extends BaseFragment {
     private Unbinder unBinder;

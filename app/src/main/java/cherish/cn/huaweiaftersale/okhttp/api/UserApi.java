@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
@@ -19,12 +20,19 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.UUID;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
 
 import cherish.cn.huaweiaftersale.base.AppContext;
+import cherish.cn.huaweiaftersale.bean.SecurityEntity;
 import cherish.cn.huaweiaftersale.okhttp.BaseApi;
 import cherish.cn.huaweiaftersale.okhttp.entity.BaseApiEntity;
 import cherish.cn.huaweiaftersale.okhttp.entity.CheckLiveEntity;
@@ -33,11 +41,13 @@ import cherish.cn.huaweiaftersale.okhttp.entity.LoginNVREntity;
 import cherish.cn.huaweiaftersale.okhttp.entity.NVREntity;
 import cherish.cn.huaweiaftersale.okhttp.entity.UserBeans;
 import cherish.cn.huaweiaftersale.okhttp.entity.VideoCheckDictEntity;
+import cherish.cn.huaweiaftersale.okhttp.utils.AESEncrypt;
 import cherish.cn.huaweiaftersale.okhttp.utils.EncryptUtil;
 import cherish.cn.huaweiaftersale.okhttp.utils.JsonUtils;
 import cherish.cn.huaweiaftersale.okhttp.utils.RSAEncrypt;
 import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.LogUtils;
+import cherish.cn.huaweiaftersale.util.SecurityHelper;
 import cherish.cn.huaweiaftersale.util.UploadUtil;
 
 /**
@@ -49,6 +59,7 @@ public class UserApi extends BaseApi {
 
     private static final String TAG = UserApi.class.getSimpleName();
     private static UserApi mInstance;
+    private AESEncrypt mAesEncrypt;
 
     public static UserApi getInstance() {
         if (null == mInstance)
@@ -60,6 +71,18 @@ public class UserApi extends BaseApi {
         super();
     }
 
+    public String  getToken(Context context) throws AppException {
+        String url = hostUrl + "user/token?accessSign="+getAccessSign(context);
+        String result=super.requestBase(context, "get",url,null,null, false);
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String message = obj.optString("data");
+        return message;
+    }
     /**
      * 用户登录
      *
@@ -69,6 +92,20 @@ public class UserApi extends BaseApi {
      * @return
      */
     public LoginNVREntity doLogin(Context context, String loginStr, String pwdStr) throws AppException {
+        String jsonData=getToken(context);
+        String token = "";
+        String sign = "";
+        try {
+            jsonData = mAesEncrypt.decryptorFromString(jsonData, "utf8");
+            SecurityEntity securityData = JSON.parseObject(jsonData, SecurityEntity.class);
+            securityData.setAesEncrypt(mAesEncrypt);
+            token=securityData.getToken();
+            sign=securityData.getSecretKey();
+        } catch (InvalidKeyException e) {
+        } catch (IllegalBlockSizeException e) {
+        } catch (BadPaddingException e) {
+        } catch (IOException e) {
+        }
         // 获取RSA公钥
         RSAEncrypt rsaEncrypt = new RSAEncrypt();
         InputStream is;
@@ -103,7 +140,7 @@ public class UserApi extends BaseApi {
 
             String loginUrl = null;
             try {
-                loginUrl = hostUrl + "apiRestController/login.do?" + "loginInfo=" + securityMsg;
+                loginUrl = hostUrl + "user/login?" + "loginInfo=" + securityMsg+"&token="+token+"&sign="+sign;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -198,7 +235,6 @@ public class UserApi extends BaseApi {
     /**
      * 修改登出方法，不需要知道服务端的相应结果，只要通知服务端即可， timeout时间设置的很短，避免app退出时卡住
      *
-     * @param context
      * @throws AppException
      */
 //    public void logout(Context context) throws AppException {
@@ -216,58 +252,48 @@ public class UserApi extends BaseApi {
 //    }
 
 
-    /**
-     * 获取服务器上的背景图片
-     *
-     * @param imgUrl
-     *
-     * @return
-     */
-    public static Bitmap getNetBitmap(String imgUrl) throws AppException {
-        Bitmap bitmap = null;
+    protected final String getAccessSign(Context mContext) throws AppException {
+        RSAEncrypt rsaEncrypt = new RSAEncrypt();
+        InputStream is;
         try {
-            URL url = new URL(imgUrl);
-            URLConnection httpCon = url.openConnection();
-            InputStream inStream = httpCon.getInputStream();
-            bitmap = BitmapFactory.decodeStream(inStream);
-            inStream.close();
+            is = mContext.getAssets().open("pubkey.pem");
+            rsaEncrypt.loadPublicKey(is);
+            is.close();
         } catch (IOException e) {
             throw AppException.io(e);
+        } catch (Exception e) {
+            throw AppException.encrypt(e);
         }
-        return bitmap;
+        // 随机生成AES秘钥，并用RSA公钥加密
+        String mAesKey = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 16);
+        mAesEncrypt = new AESEncrypt(mAesKey);
+        byte[] cipher;
+        try {
+            cipher = rsaEncrypt.encrypt(rsaEncrypt.getPublicKey(), mAesKey.getBytes());
+        } catch (Exception e) {
+            throw AppException.encrypt(e);
+        }
+        String mAccessSign = EncryptUtil.byteArr2HexStr(cipher);
+        LogUtils.d("securityApi", mAccessSign);
+        return mAccessSign;
     }
 
-
-
-    private String doPost(String imagePath) {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-
-        String result = "error";
-//        MultipartBody.Builder builder = new MultipartBody.Builder();
-//        // 这里演示添加用户ID
-//        builder.addFormDataPart("userId", "20160519142605");
-//        builder.addFormDataPart("image", imagePath,
-//                RequestBody.create(MediaType.parse("image/jpeg"), new File(imagePath)));
+//    protected static String createSign(Map<String, String> paras){
+//        Map<String, Object> tempParas = new TreeMap<String, Object>(paras);
 //
-//        RequestBody requestBody = builder.build();
-//        Request.Builder reqBuilder = new Request.Builder();
-//        Request request = reqBuilder
-//                .url(Constant.BASE_URL + "/uploadimage")
-//                .post(requestBody)
-//                .build();
-//
-//        Log.d(TAG, "请求地址 " + Constant.BASE_URL + "/uploadimage");
-//        try{
-//            Response response = mOkHttpClient.newCall(request).execute();
-//            Log.d(TAG, "响应码 " + response.code());
-//            if (response.isSuccessful()) {
-//                String resultValue = response.body().string();
-//                Log.d(TAG, "响应体 " + resultValue);
-//                return resultValue;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
+//        StringBuilder sb = new StringBuilder();
+//        int index = 0;
+//        for(Map.Entry<String, Object> entry : tempParas.entrySet()){
+//            if (index > 0)
+//                sb.append("&");
+//            sb.append(entry.getKey()).append("=").append(entry.getValue());
+//            index ++;
 //        }
-        return result;
-    }
+//        if (index > 0)
+//            sb.append("&");
+//        sb.append("key").append("=").append(secretKey);
+//        System.out.println("queryString:" + sb.toString());
+//
+//        return MD5.calcMD5(sb.toString()).toUpperCase();
+//    }
 }

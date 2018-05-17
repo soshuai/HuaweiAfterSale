@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UrlConfig
+
+    debug="false"
+    debugBaseHttp="http://121.40.63.64:80/jk_api/"
+    debugBaseHttps=""
+    defaultVersion="v1"
+    releaseBaseHttp="http://duyj.frpgz1.idcfengye.com/jk_api/"
+    releaseBaseHttps=""
+    signName="key"
+    tokenName="token">
+    <!-- 获取客户端token -->
+    <Node
+        id="@+id/api_user_token"
+        ids="api_user_token"
+        class="java.lang.String"
+        method="get"
+        needToken="false"
+        url="user/token" />
+    <Node
+        id="@+id/api_user_login"
+        ids="api_user_login"
+        class="java.lang.String"
+        encrypt="loginInfo"
+        needToken="true"
+        url="user/login" />
+</UrlConfig>

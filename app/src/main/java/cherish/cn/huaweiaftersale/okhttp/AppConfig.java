@@ -1,82 +1,57 @@
 package cherish.cn.huaweiaftersale.okhttp;
 
 import android.content.Context;
-import android.os.Environment;
 
-import java.io.File;
-import java.util.UUID;
+import cherish.cn.huaweiaftersale.net.BaseAppConfig;
 
-import cherish.cn.huaweiaftersale.util.SdkUtils;
-import cherish.cn.huaweiaftersale.util.SpfUtils;
-import cherish.cn.huaweiaftersale.util.StringUtils;
+public final class AppConfig extends BaseAppConfig {
 
-
-/**
- * 应用程序配置类：用于保存用户相关信息及设置
- */
-public class AppConfig {
-
-    /** 自动更新开关 */
-    public static final boolean AUTO_UPDATE               = true;
-    private static AppConfig    appConfig;
-
-    public static final String SAVED_LOGINCODE = "_savedLoginCode_";
-    public static final String SAVED_CASENO = "_savedCaseNo_";
-    /** 消息提示-声音播放的间隔时间 */
-    public static final long    MSG_NOTIFY_SOUND_INTERVAL = 2 * 1000;
-
-    /** 默认缓存路径 */
-    public static String PATH_CACHE_DEFAULT;
-    /** 图片缓存路径 */
-    public static String PATH_IMAGE_CACHE;
-    /** 下载缓存路径 */
-    public static String PATH_DOWNLOAD_CACHE;
-
-    private Context mContext;
-
-    public static boolean       isBigARM                  = false;
-
-    public static AppConfig getAppConfig(Context context) {
-        if (null == appConfig) {
-            appConfig = new AppConfig(context);
-            // 使用ApplicationContext避免在非AppContext中调用时 引起的内存泄漏
-            appConfig.mContext = context.getApplicationContext();
-        }
-        return appConfig;
-    }
-
-    private AppConfig(Context context) {
-        if (SdkUtils.checkSdCard()) {
-            PATH_CACHE_DEFAULT = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
-                    + context.getPackageName();
-            new File(PATH_CACHE_DEFAULT).mkdirs();
-        } else {
-            PATH_CACHE_DEFAULT = context.getCacheDir().getAbsolutePath();
-        }
-
-        PATH_IMAGE_CACHE = PATH_CACHE_DEFAULT + File.separator + "image";
-        new File(PATH_IMAGE_CACHE).mkdir();
-        PATH_DOWNLOAD_CACHE = PATH_CACHE_DEFAULT + File.separator + "dl";
-        new File(PATH_DOWNLOAD_CACHE).mkdir();
-        // 手机内存>2G为标识为大内存设备
-        if (SdkUtils.hasJellyBean_4_1()) {
-            isBigARM = (2 * 1024 * 1024 * 0.8) > SdkUtils.getDeviceARMSize(context);
-        }
-    }
-
-    public static final String CONF_APP_UNIQUEID = "conf_app_uniqueid";
+    public static final String SAVE_CONFIG_KEY = "appConfig";
 
     /**
-     * 获取App唯一标识
-     * 
-     * @return
+     * 消息提示-声音播放的间隔时间
      */
-    public String getAppId() {
-        String uniqueID = SpfUtils.getString(mContext, AppConfig.CONF_APP_UNIQUEID);
-        if (StringUtils.isEmpty(uniqueID)) {
-            uniqueID = UUID.randomUUID().toString();
-            SpfUtils.saveString(mContext, CONF_APP_UNIQUEID, uniqueID);
-        }
-        return uniqueID;
+    public static final long MSG_NOTIFY_SOUND_INTERVAL = 2 * 1000;
+    /**
+     * 语音消息最长录音时间
+     */
+    public static final int MSG_VOICE_MIN_LENGTH = 1 * 1000;
+    public static final int MSG_VOICE_MAX_LENGTH = 35 * 1000;
+
+    public static final String KEY_EXTENSION = "collectorhunter";
+    public static final String KEY_EXTENSION_NAMESPACE = "collector_hunter";
+    public static final String KEY_TIME = "time";
+    public static final String KEY_MSG_CONTENT_TYPE = "msg_content_type";
+    public static final String KEY_MSG_TYPE = "msg_type";
+    public static final String KEY_URI = "uri";
+    public static final String KEY_DATA = "data";
+
+    private static AppConfig sAppConfig;
+
+    public static final int BOSS_MAIN_TAB_COUNT = 3;
+    public static final int COUNT_DOWN_TIME = 60000;
+
+//    public static final String ECARDURL="http://47.92.92.147:80/jk_api/v1/view/myCard";
+//    public static final String BEHAVIORURL="http://47.92.92.147:80/jk_api/v1/view/customBehavior";
+//    public static final String REPORTURL="http://47.92.92.147:80/jk_api/v1/view/statistics";
+
+    //http://121.40.63.64:80/jk_api/
+
+    public static final String ECARDURL = "http://47.92.92.147:80/jk_api/v1/view/myCard";
+    public static final String BEHAVIORURL = "http://47.92.92.147:80/jk_api/v1/view/customBehavior";
+    public static final String REPORTURL = "http://47.92.92.147:80/jk_api/v1/view/statistics";
+    public static final String ADDSTATE = "http://47.92.92.147:80/jk_api/v1/view/addState";
+
+    private AppConfig(Context context) {
+        super(context);
     }
+
+    public static synchronized void initialize(Context context) {
+        if (null == sAppConfig) {
+            sAppConfig = new AppConfig(context);
+        }
+    }
+
+
 }
+

@@ -34,7 +34,7 @@ public abstract class BaseApi {
 
 
     public final static String ONLINE_API_HOSTURL       = "http://www.cloud-dahua.com:8088/gateway/";
-    private final static String DEBUG_API_HOSTURL        = "http://192.168.10.45:8080/saicmaxus/";
+    private final static String DEBUG_API_HOSTURL        = "http://duyj.frpgz1.idcfengye.com/jk_api/v1/";
 
     private final static String HTTPS_ONLINE_API_HOSTURL = "https://121.40.63.64:442/";
     private final static String HTTPS_DEBUG_API_HOSTURL  = "https://27.115.24.102:8182/";

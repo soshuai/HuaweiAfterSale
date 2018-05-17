@@ -9,7 +9,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
-import de.greenrobot.event.EventBus;
 
 public class MineFragment extends BaseFragment {
     private Unbinder unBinder;

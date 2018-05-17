@@ -9,9 +9,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import butterknife.ButterKnife;
 import cherish.cn.huaweiaftersale.R;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     // 日志打印tag
     protected String TAG;
@@ -23,6 +25,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -39,8 +42,10 @@ public class BaseActivity extends AppCompatActivity {
         AppManager.getInstance().addActivity(this);
         mContext = this;
         mApp = AppContext.getInstance();
+        ButterKnife.bind(this);
     }
 
+    protected abstract int getLayoutId();
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);

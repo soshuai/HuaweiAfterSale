@@ -17,6 +17,9 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.okhttp.AppConfig;
 import cherish.cn.huaweiaftersale.okhttp.BaseApi;
+import cherish.cn.huaweiaftersale.okhttp.api.UserApi;
+import cherish.cn.huaweiaftersale.okhttp.entity.LoginNVREntity;
+import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.DynamicTimeFormat;
 
 /**
@@ -27,6 +30,7 @@ public final class AppContext extends Application {
     private static AppContext mApp;
     public static String TOKEN;
     public static boolean success=false;
+    private LoginNVREntity loginContext;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,8 +42,7 @@ public final class AppContext extends Application {
      * 初始化
      */
     public void init() {
-        // 配置信息初始化
-        AppConfig.getAppConfig(this);
+        AppConfig.initialize(this);
         // api 初始化
         BaseApi.initialize(this);
 
@@ -63,6 +66,18 @@ public final class AppContext extends Application {
     }
     public static AppContext getInstance(){
         return mApp;
+    }
+
+    public boolean loginVerify(String loginStr, String pwdStr) throws AppException {
+        loginContext = UserApi.getInstance().doLogin(this, loginStr, pwdStr);
+        return isLogin();
+    }
+    public boolean isLogin() {
+        if ((loginContext != null&&loginContext.getOk()) ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

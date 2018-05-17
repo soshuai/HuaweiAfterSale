@@ -1,7 +1,14 @@
 package cherish.cn.huaweiaftersale.util;
 
+import android.content.Context;
+
 import cherish.cn.huaweiaftersale.base.AppContext;
+import cherish.cn.huaweiaftersale.base.SecurityHolder;
+import cherish.cn.huaweiaftersale.bean.SecurityEntity;
 import cherish.cn.huaweiaftersale.bean.SecurityUserEntity;
+import cherish.cn.huaweiaftersale.callback.DataCallback;
+import cherish.cn.huaweiaftersale.security.SecurityLoginHandler;
+import cherish.cn.huaweiaftersale.security.model.LoginModel;
 
 /**
  * Created by Veryxyf on 2016-5-17.
@@ -23,9 +30,9 @@ public final class SecurityHelper {
         return sInstance;
     }
 
-//    public static void saveSecurityData(SecurityEntity securityData) {
-//        SecurityHolder.saveSecurityData(securityData);
-//    }
+    public static void saveSecurityData(SecurityEntity securityData) {
+        SecurityHolder.saveSecurityData(securityData);
+    }
 
     public static synchronized SecurityUserEntity findUserData() {
         return SecurityHelper.getInstance().getUserData();
@@ -50,16 +57,13 @@ public final class SecurityHelper {
 //        }
 //    }
 
-//    public static void register(final Context context, final DataCallback callback, UserRegisterModel model) {
-//        new SecurityRegisterHandler(context, callback).doRegister(JSON.toJSONString(model), model.getMobile(), model.getPassword());
-//    }
 
-//    public static void login(final Context context, final DataCallback callback, LoginModel model) {
-//        try {
-//            new SecurityLoginHandler(context, callback).doLogin(model);
-//        } catch (AppException appe) {
-//        }
-//    }
+    public static void login(final Context context, final DataCallback callback, LoginModel model) {
+        try {
+            new SecurityLoginHandler(context, callback).doLogin(model);
+        } catch (AppException appe) {
+        }
+    }
 
 
     public static synchronized void logtimeout() {

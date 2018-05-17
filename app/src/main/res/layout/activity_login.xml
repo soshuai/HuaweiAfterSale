@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/interval_larger">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/interval_max_150">
+
+        <EditText
+            android:id="@+id/account"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:theme="@style/MyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="用户名"
+            android:paddingLeft="@dimen/interval_great" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/person" />
+
+        <ImageView
+            android:id="@+id/more_list"
+            android:padding="@dimen/interval_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:src="@drawable/more_list" />
+    </RelativeLayout>
+    <ListView
+        android:divider="@null"
+        android:id="@+id/more_listview"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/interval_mini"
+        android:layout_marginRight="@dimen/interval_mini"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+    <RelativeLayout
+        android:id="@+id/password_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/interval_great">
+
+        <EditText
+            android:id="@+id/password"
+            android:theme="@style/MyEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"
+            android:paddingLeft="@dimen/interval_great" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/key" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/interval_great"
+        android:background="@drawable/shape_general_button_vv"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_large" />
+</LinearLayout>

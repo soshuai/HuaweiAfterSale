@@ -24,7 +24,6 @@ import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.adapter.NewWorkAdapter;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.bean.WorkBean;
-import de.greenrobot.event.EventBus;
 
 public class NewWorkOrderFragment extends BaseFragment {
     private Unbinder unBinder;

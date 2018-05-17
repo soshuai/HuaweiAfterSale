@@ -13,7 +13,6 @@ import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.base.BaseMultiFragsFragment;
-import de.greenrobot.event.EventBus;
 
 public class OrderHandleFragment extends BaseMultiFragsFragment implements View.OnClickListener{
     private Unbinder unBinder;
