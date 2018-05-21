@@ -2,11 +2,16 @@ package cherish.cn.huaweiaftersale.util;
 
 import android.content.Context;
 
+import org.greenrobot.eventbus.EventBus;
+
+import cherish.cn.huaweiaftersale.R;
+import cherish.cn.huaweiaftersale.base.ApiHelper;
 import cherish.cn.huaweiaftersale.base.AppContext;
 import cherish.cn.huaweiaftersale.base.SecurityHolder;
 import cherish.cn.huaweiaftersale.bean.SecurityEntity;
 import cherish.cn.huaweiaftersale.bean.SecurityUserEntity;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
+import cherish.cn.huaweiaftersale.event.LogoutEvent;
 import cherish.cn.huaweiaftersale.security.SecurityLoginHandler;
 import cherish.cn.huaweiaftersale.security.model.LoginModel;
 
@@ -38,10 +43,10 @@ public final class SecurityHelper {
         return SecurityHelper.getInstance().getUserData();
     }
 
-//    public static synchronized boolean isLogin() {
-//        SecurityUserEntity user = SecurityHelper.getInstance().getUserData();
-//        return (user != null && user.getUser() != null && user.getUser().getId() > 0);
-//    }
+    public static synchronized boolean isLogin() {
+        SecurityUserEntity user = SecurityHelper.getInstance().getUserData();
+        return (user != null && user.getUser() != null && user.getUser().getId() > 0);
+    }
 
 //    public static void registerVCode(final Context context, final DataCallback callback, String mobile) {
 //        try {
@@ -69,7 +74,7 @@ public final class SecurityHelper {
     public static synchronized void logtimeout() {
         if (sInstance != null) {
             sInstance.userData = null;
-//            EventBus.getDefault().post(new LogoutEvent(false));
+            EventBus.getDefault().post(new LogoutEvent(false));
         }
     }
 
@@ -78,8 +83,8 @@ public final class SecurityHelper {
             sInstance.userData = null;
             SpfUtils.saveString(AppContext.getInstance().getApplicationContext(), "loginCode", "");
             SpfUtils.saveString(AppContext.getInstance().getApplicationContext(), "password", "");
-//            EventBus.getDefault().post(new LogoutEvent(true));
-//            ApiHelper.load(AppContext.getInstance().getApplicationContext(), R.id.api_user_logout, null);
+            EventBus.getDefault().post(new LogoutEvent(true));
+            ApiHelper.load(AppContext.getInstance().getApplicationContext(), R.id.api_user_logout, null);
         }
     }
 

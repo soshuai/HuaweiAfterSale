@@ -3,7 +3,10 @@ package cherish.cn.huaweiaftersale.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,7 +23,11 @@ import cherish.cn.huaweiaftersale.net.UrlData;
 import cherish.cn.huaweiaftersale.net.callback.BaseJsonCallback;
 import cherish.cn.huaweiaftersale.net.callback.JsonArrayCallback;
 import cherish.cn.huaweiaftersale.net.callback.JsonObjectCallback;
+import cherish.cn.huaweiaftersale.okhttp.entity.BaseApiEntity;
+import cherish.cn.huaweiaftersale.okhttp.entity.VideoCheckDictEntity;
+import cherish.cn.huaweiaftersale.okhttp.utils.JsonUtils;
 import cherish.cn.huaweiaftersale.util.LogUtils;
+import cherish.cn.huaweiaftersale.util.UploadUtil;
 
 /**
  * 数据管理器
@@ -230,4 +237,56 @@ public final class DataManager {
         HttpManager.getInstance(context).sendRequest(context, urlData, getMapFromBundle(bundle), jcallback);
     }
 
+
+    /**
+     * 获取数据
+     * @param context
+     * @param funcKey
+     * @param callback
+     */
+    public void submit(Context context, int funcKey, Map<String, String> params, DataCallback callback,Map<String, File> files) {
+        UrlData urlData = UrlConfigManager.getInstance().findURL(context, funcKey);
+        if (urlData == null || TextUtils.isEmpty(urlData.getReturnClass())) {
+            throw new IllegalArgumentException();
+        }
+        if (urlData.isNeedToken() && TextUtils.isEmpty(SecurityHolder.findSecurityData().getToken())) {
+            return;
+        }
+        synchronized (this.mUsedUrlMap) {
+            Integer usedCount = this.mUsedUrlMap.get(funcKey);
+            if (usedCount != null && usedCount.intValue() >= urlData.getCountLimit()) {
+                LogUtils.w("dataManager", "funcKey get count limit " + funcKey);
+                return;
+            }
+            this.mUsedUrlMap.put(funcKey, usedCount == null ? 1 : usedCount.intValue() + 1);
+        }
+
+        String jsonClass = urlData.getReturnClass().trim();
+
+        String result = "";
+        VideoCheckDictEntity entity = null;
+        Class<VideoCheckDictEntity> entityClass = VideoCheckDictEntity.class;
+        try {
+            result = UploadUtil.post(urlData+"", params, files);
+            if (TextUtils.isEmpty(result)) {
+                entity = entityClass.getDeclaredConstructor(Integer.class, String.class).newInstance(
+                        BaseApiEntity.ERROR_CODE_NET, "网络异常");
+            } else {
+                entity= JsonUtils.parseGson(result,entityClass);
+                if (null == entity) {
+                    entity = entityClass.getDeclaredConstructor(Integer.class, String.class).newInstance(
+                            BaseApiEntity.ERROR_CODE_JSON, "json格式不正确");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                entity = entityClass.getDeclaredConstructor(Integer.class, String.class).newInstance(
+                        BaseApiEntity.ERROR_CODE_UNKOWN, "未知异常");
+            } catch (Exception e1) {
+            }
+        }
+        Log.i("http url", urlData+"");
+        Log.i("http result", result);
+    }
 }

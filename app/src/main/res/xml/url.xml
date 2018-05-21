@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <UrlConfig
-
     debug="false"
     debugBaseHttp="http://121.40.63.64:80/jk_api/"
     debugBaseHttps=""
@@ -11,17 +10,58 @@
     tokenName="token">
     <!-- 获取客户端token -->
     <Node
+        class="java.lang.String"
         id="@+id/api_user_token"
         ids="api_user_token"
-        class="java.lang.String"
         method="get"
         needToken="false"
         url="user/token" />
     <Node
+        class="java.lang.String"
         id="@+id/api_user_login"
         ids="api_user_login"
-        class="java.lang.String"
         encrypt="loginInfo"
         needToken="true"
         url="user/login" />
+    <Node
+        class=".okhttp.entity.DefaultApiEntity"
+        id="@+id/api_user_logout"
+        ids="api_user_logout"
+        needToken="true"
+        url="user/logout" />
+    <Node
+        class=".okhttp.entity.DefaultApiEntity"
+        id="@+id/api_set_push_channel"
+        ids="api_set_push_channel"
+        method="get"
+        needToken="true"
+        url="user/set/channel" />
+    <Node
+        class="[.entity.OrderListDataEntity"
+        id="@+id/api_order_list"
+        ids="api_order_list"
+        method="get"
+        needToken="true"
+        url="order/list" />
+    <Node
+        class="[.entity.OrderGetrecordDataEntity"
+        id="@+id/api_order_getRecord"
+        ids="api_order_getRecord"
+        method="get"
+        needToken="true"
+        url="order/getRecord" />
+    <Node
+        class=".entity.DefaultApiEntity"
+        id="@+id/api_order_update"
+        ids="api_order_update"
+        method="get"
+        needToken="true"
+        url="order/update" />
+    <Node
+        class=".entity.DefaultApiEntity"
+        id="@+id/api_order_ajaxSaveFile"
+        ids="api_order_ajaxSaveFile"
+        method="post"
+        needToken="false"
+        url="order/ajaxSaveFile" />
 </UrlConfig>

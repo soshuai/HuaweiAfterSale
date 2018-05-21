@@ -6,17 +6,21 @@ package cherish.cn.huaweiaftersale.bean;
 
 public class WorkBean {
     private String number;
-    private String  time;
+    private int  time;
     private String  location;
     private String  customer;
     private String  phone;
+    private String  states;
+    private String  recordId;
 
-    public WorkBean(String number, String time, String location, String customer, String phone) {
+    public WorkBean(String number, int time, String location, String customer, String phone,String states,String recordId) {
         this.number = number;
         this.time = time;
         this.location = location;
         this.customer = customer;
         this.phone = phone;
+        this.states=states;
+        this.recordId=recordId;
     }
 
     public String getNumber() {
@@ -27,12 +31,8 @@ public class WorkBean {
         this.number = number;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getLocation() {
@@ -57,5 +57,13 @@ public class WorkBean {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getStates() {
+        return states;
+    }
+
+    public String getRecordId() {
+        return recordId;
     }
 }

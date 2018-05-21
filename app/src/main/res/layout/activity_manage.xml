@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/shape_button_bac_white"
     android:orientation="vertical">
-
+    <include layout="@layout/top_title_customer"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/interval_default"
-            android:text="等待接单"
+            android:text="已接单.进行中"
             android:textSize="12sp" />
     </RelativeLayout>
 
@@ -185,58 +185,75 @@
                 android:gravity="center"
                 android:text="13900000000"
                 android:textColor="@color/black" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:background="@color/content_line" />
         </LinearLayout>
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="@dimen/interval_tiny"
+        android:layout_marginLeft="@dimen/interval_default"
+        android:layout_marginRight="@dimen/interval_default"
+        android:background="@drawable/shape_textview_border"
+        android:gravity="center|left"
+        android:hint="填写处理结果"
+        android:textSize="15sp"
+        android:lines="7"
+        android:maxLines="7"
+        android:padding="@dimen/interval_smaller"
+        android:textColor="@color/night_gray" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/interval_huge"
-        android:layout_marginTop="@dimen/interval_huge">
+        android:layout_marginTop="@dimen/interval_small">
 
-        <TextView
-            android:id="@+id/refuse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/interval_great"
-            android:layout_toLeftOf="@+id/accept"
-            android:text="拒单"
-            android:textColor="@color/colorAccent" />
+        <ImageView
+            android:layout_marginLeft="@dimen/interval_default"
+            android:id="@+id/img1"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/default_img" />
 
-        <TextView
-            android:id="@+id/accept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/interval_larger"
-            android:background="@drawable/shape_general_button_vv"
-            android:paddingBottom="@dimen/interval_tiny"
-            android:paddingLeft="@dimen/interval_huge"
-            android:paddingRight="@dimen/interval_huge"
-            android:paddingTop="@dimen/interval_tiny"
-            android:text="接单"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/interval_large"
+            android:src="@drawable/default_img" />
 
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/interval_large"
+            android:src="@drawable/default_img" />
+        <ImageView
+            android:id="@+id/img4"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/interval_large"
+            android:src="@drawable/default_img" />
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="@dimen/interval_large"
+            android:layout_marginRight="@dimen/interval_default"
+            android:src="@drawable/photo_all" />
+    </LinearLayout>
     <TextView
         android:id="@+id/manage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/interval_default"
-        android:layout_marginLeft="@dimen/interval_larger"
-        android:layout_marginRight="@dimen/interval_larger"
+        android:layout_marginLeft="@dimen/interval_huge"
+        android:layout_marginRight="@dimen/interval_huge"
+        android:layout_marginTop="@dimen/interval_great"
         android:background="@drawable/shape_general_button_vv"
         android:gravity="center"
         android:paddingBottom="@dimen/interval_small"
         android:paddingTop="@dimen/interval_small"
-        android:text="处理工单"
-        android:textColor="@color/white"
-        android:visibility="gone" />
+        android:text="处理完成"
+        android:textColor="@color/white" />
 </LinearLayout>

@@ -1,11 +1,9 @@
 package cherish.cn.huaweiaftersale;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +13,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cherish.cn.huaweiaftersale.adapter.LoginMoreAdapter;
-import cherish.cn.huaweiaftersale.base.AppContext;
 import cherish.cn.huaweiaftersale.base.BaseActivity;
 import cherish.cn.huaweiaftersale.bean.LoginMoreBean;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
@@ -70,11 +66,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         login.setOnClickListener(this);
         list.add(new LoginMoreBean("13122626056", "123456"));
         list.add(new LoginMoreBean("安妮海瑟薇", "123"));
-        list.add(new LoginMoreBean("丽丽", "123"));
+        list.add(new LoginMoreBean("15555714326", "123456"));
         list.add(new LoginMoreBean("尼尼", "123"));
-        list.add(new LoginMoreBean("美国队长", "123"));
-        list.add(new LoginMoreBean("雷神", "123"));
-        list.add(new LoginMoreBean("小李子", "123"));
         adapter = new LoginMoreAdapter(mContext, this, list);
         listView.setAdapter(adapter);
     }
@@ -136,7 +129,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             LoadingDialogUtils.closeDialog();
             finish();
         }
-
     }
 }
 

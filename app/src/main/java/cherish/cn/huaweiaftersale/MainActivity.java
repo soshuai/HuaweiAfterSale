@@ -16,6 +16,7 @@ import cherish.cn.huaweiaftersale.base.BaseMultiFragsActivity;
 import cherish.cn.huaweiaftersale.fragment.MineFragment;
 import cherish.cn.huaweiaftersale.fragment.OrderHandleFragment;
 import cherish.cn.huaweiaftersale.fragment.OrderSearchFragment;
+import cherish.cn.huaweiaftersale.jpush.JPushHelper;
 import cherish.cn.huaweiaftersale.util.DoubleClickExitHelper;
 
 public class MainActivity extends BaseMultiFragsActivity {
@@ -26,6 +27,7 @@ public class MainActivity extends BaseMultiFragsActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        JPushHelper.resumePush();
     }
 
     @Override

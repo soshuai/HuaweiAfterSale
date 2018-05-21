@@ -15,6 +15,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import cherish.cn.huaweiaftersale.R;
+import cherish.cn.huaweiaftersale.jpush.JPushHelper;
 import cherish.cn.huaweiaftersale.okhttp.AppConfig;
 import cherish.cn.huaweiaftersale.okhttp.BaseApi;
 import cherish.cn.huaweiaftersale.okhttp.api.UserApi;
@@ -53,7 +54,7 @@ public final class AppContext extends Application {
             builder.detectFileUriExposure();
         }
         Fresco.initialize(mApp);
-
+        JPushHelper.init();
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         SmartRefreshLayout.setDefaultRefreshHeaderCreater(new DefaultRefreshHeaderCreater() {
             @NonNull

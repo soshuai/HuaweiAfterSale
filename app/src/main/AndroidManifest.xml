@@ -26,7 +26,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:theme="@style/AppThemes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,9 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
@@ -62,6 +61,7 @@
             android:value="99502479e28cc1663c8fcd8b" />
         <!-- xyf cac4919f6b25273484aa3792 -->
 
+        <activity android:name=".ManageActivity"></activity>
     </application>
 
 </manifest>
