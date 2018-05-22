@@ -70,6 +70,8 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     private final static int CROP = 200;
     private String id;
     List<String> imgList = new ArrayList<>();
+    private String recordId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +83,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
         back.setOnClickListener(this);
         photo.setOnClickListener(this);
         title.setText("处理工单");
-        String recordId=getIntent().getStringExtra("recordId");
+        recordId=getIntent().getStringExtra("recordId");
         Bundle bundle = new Bundle();
         bundle.putString("recordId", recordId);
         ApiHelper.load(mContext, R.id.api_order_getRecord, bundle, this);
@@ -110,30 +112,16 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void doSubmit() {
-        Map<String,String> map=new HashMap<>();
         Map<String,File> files=new HashMap<>();
-        map.put("","");
-        ApiHelper.submit(mContext,R.id.api_order_ajaxSaveFile,map,this,files);
-    }
-
-    @Override
-    public void onFailure(int funcKey, Bundle bundle, AppException appe) {}
-
-    @Override
-    public void onSuccess(int funcKey, Bundle bundle, Object data) {
-        if (funcKey==R.id.api_order_getRecord){
-            List<OrderGetrecordDataEntity> list= (List<OrderGetrecordDataEntity>) data;
-            OrderGetrecordDataEntity entity=list.get(0);
-            GetRecordInfo info=entity.getInfo();
-            if (info!=null){
-               name.setText(info.getUserName());
-               phone.setText(info.getUserMobile());
-               time.setText(getTime(info.getMinute()));
-               location.setText(info.getMeetingName());
-               state.setText(info.getStatus());
-               id=info.getRecordId();
+        for (int i = 0; i < imgList.size(); i++) {
+            File file = new File(imgList.get(i));
+            if (file.exists()) {
+                files.put(""+i,file);
             }
         }
+        Map<String,String> map=new HashMap<>();
+        map.put("recordId",recordId);
+        ApiHelper.submit(mContext,R.id.api_order_ajaxSaveFile,map,this,files);
     }
 
     private String getTime(int time) {
@@ -299,5 +287,23 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
         int point = fileName.lastIndexOf('.');
         return fileName.substring(point + 1);
     }
+    @Override
+    public void onFailure(int funcKey, Bundle bundle, AppException appe) {}
 
+    @Override
+    public void onSuccess(int funcKey, Bundle bundle, Object data) {
+        if (funcKey==R.id.api_order_getRecord){
+            List<OrderGetrecordDataEntity> list= (List<OrderGetrecordDataEntity>) data;
+            OrderGetrecordDataEntity entity=list.get(0);
+            GetRecordInfo info=entity.getInfo();
+            if (info!=null){
+                name.setText(info.getUserName());
+                phone.setText(info.getUserMobile());
+                time.setText(getTime(info.getMinute()));
+                location.setText(info.getMeetingName());
+                state.setText(info.getStatus());
+                id=info.getRecordId();
+            }
+        }
+    }
 }

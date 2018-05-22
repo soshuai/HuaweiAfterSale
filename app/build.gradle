@@ -38,10 +38,8 @@ dependencies {
     implementation files('libs/jackson-core-2.3.1.jar')
     implementation files('libs/jackson-databind-2.3.1.jar')
     implementation 'com.jakewharton:butterknife:8.8.1'
-
     compile files('libs/jcore-android_v1.1.2.jar')
     compile files('libs/jpush-android_v3.0.5.jar')
-
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.facebook.fresco:fresco:0.10.0'
@@ -49,5 +47,5 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.51.android'
     implementation project(':refresh-layout')
     implementation files('libs/jpush-android_v3.0.5.jar')
-    implementation files('libs/AMap3DMap_5.1.0_AMapNavi_5.1.0_AMapSearch_5.1.0_AMapLocation_3.4.0_20170518.jar')
+    implementation files('libs/AMap_Location_V4.0.1_20180426.jar')
 }

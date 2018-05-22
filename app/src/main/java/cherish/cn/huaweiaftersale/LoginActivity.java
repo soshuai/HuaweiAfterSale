@@ -1,4 +1,5 @@
 package cherish.cn.huaweiaftersale;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import cherish.cn.huaweiaftersale.adapter.LoginMoreAdapter;
 import cherish.cn.huaweiaftersale.base.BaseActivity;
@@ -22,6 +25,7 @@ import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.LoadingDialogUtils;
 import cherish.cn.huaweiaftersale.util.SecurityHelper;
 import cherish.cn.huaweiaftersale.util.StringUtils;
+
 import static cherish.cn.huaweiaftersale.R.id.api_user_login;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginMoreAdapter.LoginItemClick, DataCallback {
@@ -48,8 +52,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
-                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CODE);
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        , Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSIONS_REQUEST_CODE);
             }
         }
         init();

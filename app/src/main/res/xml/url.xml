@@ -4,7 +4,7 @@
     debugBaseHttp="http://121.40.63.64:80/jk_api/"
     debugBaseHttps=""
     defaultVersion="v1"
-    releaseBaseHttp="http://duyj.frpgz1.idcfengye.com/jk_api/"
+    releaseBaseHttp="http://192.168.10.55/jk_api/"
     releaseBaseHttps=""
     signName="key"
     tokenName="token">
