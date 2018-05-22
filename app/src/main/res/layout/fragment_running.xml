@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_gray"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/no_order"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/interval_max_50"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/noorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/interval_smaller"
+            android:textSize="16sp"
+            android:text="@string/no_order"
+            android:textColor="@color/no_order_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableFooterFollowWhenLoadFinished="true"
+        app:srlEnableScrollContentWhenLoaded="true">
+
+        <ListView
+            android:layout_marginBottom="@dimen/interval_small"
+            android:layout_marginLeft="@dimen/interval_smaller"
+            android:layout_marginRight="@dimen/interval_smaller"
+            android:layout_marginTop="@dimen/text_size_larger"
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:divider="@null"
+            android:dividerHeight="@dimen/interval_default"
+            android:fadeScrollbars="false"
+            android:scrollbars="none" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

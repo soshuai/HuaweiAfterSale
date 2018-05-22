@@ -1,9 +1,15 @@
 package cherish.cn.huaweiaftersale.base;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.util.ToastHolder;
 
 /**
@@ -15,6 +21,19 @@ public abstract class BaseFragment extends Fragment {
     protected String mPageName;
 
     protected boolean isChoosed = false;
+    private Unbinder unBinder;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(getLayoutId(),container,false);
+        unBinder = ButterKnife.bind(this, view);
+        init(view);
+        return view;
+    }
+
+    protected abstract void init(View view);
+    protected abstract int getLayoutId();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,4 +88,13 @@ public abstract class BaseFragment extends Fragment {
 //            MobclickAgent.onPageEnd(mPageName);
 //        }
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (unBinder != null)
+            unBinder.unbind();
+    }
+
+
 }

@@ -15,24 +15,19 @@ import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.base.BaseMultiFragsFragment;
 
 public class OrderHandleFragment extends BaseMultiFragsFragment implements View.OnClickListener{
-    private Unbinder unBinder;
     private MainPagerTabContext[] mTabContexts;
     private int mTabNum = 2;
     private View top;
     private int mInitIndex;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order_handle, container, false);
-//        EventBus.getDefault().register(this);
-        unBinder = ButterKnife.bind(this, view);
-        init(view);
-        init();
-        return view;
+    protected void init(View view) {
+        inits(view);
     }
 
-    private void init() {
-
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_order_handle;
     }
 
     protected void putFragmentArg(int position, Bundle b) {

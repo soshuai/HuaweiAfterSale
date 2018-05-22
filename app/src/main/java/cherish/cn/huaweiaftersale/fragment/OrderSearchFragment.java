@@ -25,24 +25,15 @@ import cherish.cn.huaweiaftersale.bean.SearchBean;
 import cherish.cn.huaweiaftersale.bean.WorkBean;
 
 public class OrderSearchFragment extends BaseFragment {
-    private Unbinder unBinder;
     @BindView(R.id.listview)
     ListView listView;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     private SearchAdapter adapter;
     private List<SearchBean> list;
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order_search, container, false);
-//        EventBus.getDefault().register(this);
-        unBinder = ButterKnife.bind(this, view);
-        init();
-        return view;
-    }
 
-    private void init() {
+    @Override
+    protected void init(View view) {
         list=new ArrayList<>();
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -62,6 +53,11 @@ public class OrderSearchFragment extends BaseFragment {
         refreshLayout.autoRefresh();
         adapter=new SearchAdapter(mContext,list);
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_order_search;
     }
 
     private void loadList() {

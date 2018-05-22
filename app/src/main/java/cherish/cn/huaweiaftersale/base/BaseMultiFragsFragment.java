@@ -39,7 +39,7 @@ public abstract class BaseMultiFragsFragment extends BaseFragment implements OnP
 
     protected BaseFragment currentFragment;
 
-    protected final void init(View view) {
+    protected final void inits(View view) {
         // 初始化pager
         initViewPager(view);
         // 创建context

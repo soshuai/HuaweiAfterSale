@@ -11,18 +11,14 @@ import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 
 public class MineFragment extends BaseFragment {
-    private Unbinder unBinder;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mine, container, false);
-//        EventBus.getDefault().register(this);
-        unBinder = ButterKnife.bind(this, view);
-        init();
-        return view;
-    }
-
-    private void init() {
+    protected void init(View view) {
 
     }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_mine;
+    }
+
 }

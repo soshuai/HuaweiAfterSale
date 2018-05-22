@@ -24,7 +24,6 @@ import cherish.cn.huaweiaftersale.entity.OrderListEntity;
 import cherish.cn.huaweiaftersale.util.AppException;
 
 public class NewWorkOrderFragment extends BaseFragment implements DataCallback {
-    private Unbinder unBinder;
     @BindView(R.id.listview)
     ListView listView;
     @BindView(R.id.refreshLayout)
@@ -36,15 +35,7 @@ public class NewWorkOrderFragment extends BaseFragment implements DataCallback {
     private NewWorkOrderFragment context;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_work_order, container, false);
-        unBinder = ButterKnife.bind(this, view);
-        init();
-        return view;
-    }
-
-    private void init() {
+    protected void init(View view) {
         context = this;
         list = new ArrayList<>();
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
@@ -62,6 +53,11 @@ public class NewWorkOrderFragment extends BaseFragment implements DataCallback {
         refreshLayout.autoRefresh();
         adapter = new NewWorkAdapter(mContext, list);
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_new_work_order;
     }
 
 //    private void loadList() {
