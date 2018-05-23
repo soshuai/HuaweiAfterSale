@@ -1,7 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/bg_gray"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnableFooterFollowWhenLoadFinished="true"
+        app:srlEnableScrollContentWhenLoaded="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/interval_max_50">
+
+                    <LinearLayout
+                        android:id="@+id/line1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/text_size_larger"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="深圳坂田华为园区.J区"
+                            android:textSize="@dimen/text_size_default" />
+
+                        <TextView
+                            android:id="@+id/customer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="谢君豪"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_huge" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/manage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/line1"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/interval_default"
+                        android:background="@drawable/shape_general_button_vv"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/interval_small"
+                        android:paddingLeft="@dimen/interval_default"
+                        android:paddingRight="@dimen/interval_default"
+                        android:paddingTop="@dimen/interval_small"
+                        android:text="上班打卡"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/text_size_larger"
+                    android:padding="@dimen/interval_small">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/general_shape2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/interval_larger"
+                        android:paddingTop="@dimen/interval_larger">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="完成工单次数"
+                                android:textSize="@dimen/text_size_default" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="25"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_huge" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/interval_small"
+                        android:layout_height="20dp" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/general_shape2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/interval_larger"
+                        android:paddingTop="@dimen/interval_larger">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+
+                                android:layout_height="wrap_content"
+                                android:text="累计服务时长"
+                                android:textSize="@dimen/text_size_default" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="80"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_huge" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/interval_larger"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/interval_default">
+
+                <TextView
+                    android:id="@+id/reset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/interval_smaller"
+                    android:paddingTop="@dimen/interval_smaller"
+                    android:text="修改密码"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_large2" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/bg_gray" />
+
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/interval_smaller"
+                    android:paddingTop="@dimen/interval_smaller"
+                    android:text="退出登录"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_large2" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

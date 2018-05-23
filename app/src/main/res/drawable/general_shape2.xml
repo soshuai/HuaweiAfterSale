@@ -2,5 +2,6 @@
     android:shape="rectangle"><!-- 其中rectagle表示矩形，oval表示椭圆，line表示水平直线，ring表示环形 -->
 
     <solid android:color="@color/white" />
-    <corners android:radius="5dp"/>
+    <corners android:radius="8dp"/>
+    <stroke android:color="@color/bg_gray" android:width="@dimen/interval_mininum"/>
 </shape>

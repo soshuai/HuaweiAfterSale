@@ -5,12 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/top_color" />
-
     <cherish.cn.huaweiaftersale.view.ClearEditText
         android:id="@+id/filter_edit"
         android:layout_width="fill_parent"

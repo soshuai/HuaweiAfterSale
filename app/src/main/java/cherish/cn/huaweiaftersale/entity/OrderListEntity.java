@@ -7,8 +7,6 @@ public class OrderListEntity {
 
     private String message;
 
-    private List<OrderListDataEntity> dataList;
-
     public void setResult(int result) {
         this.result = result;
     }
@@ -25,12 +23,5 @@ public class OrderListEntity {
         return this.message;
     }
 
-    public void setDataList(List<OrderListDataEntity> dataList) {
-        this.dataList = dataList;
-    }
-
-    public List<OrderListDataEntity> getDataList() {
-        return this.dataList;
-    }
 
 }

@@ -9,6 +9,7 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cherish.cn.huaweiaftersale.LoginActivity;
 import cherish.cn.huaweiaftersale.MainActivity;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.AppContext;
@@ -42,7 +43,7 @@ public class MyReceiver extends BroadcastReceiver {
             if (SecurityHelper.getInstance().findUserData().getUser() != null) {
                 i = new Intent(context, MainActivity.class);
             } else {
-                i = new Intent(context, MainActivity.class);
+                i = new Intent(context, LoginActivity.class);
             }
             i.putExtras(bundle);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

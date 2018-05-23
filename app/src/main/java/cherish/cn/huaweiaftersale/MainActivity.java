@@ -145,14 +145,10 @@ public class MainActivity extends BaseMultiFragsActivity implements DataCallback
 
     @Override
     public void onFailure(int funcKey, Bundle bundle, AppException appe) {
-
     }
 
     @Override
     public void onSuccess(int funcKey, Bundle bundle, Object data) {
-        if (funcKey == R.id.api_savePosition) {
-            Log.i("AAAA",data.toString());
-        }
     }
 
 

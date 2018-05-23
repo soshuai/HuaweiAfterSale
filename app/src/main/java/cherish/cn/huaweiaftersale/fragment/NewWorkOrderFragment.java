@@ -1,8 +1,6 @@
 package cherish.cn.huaweiaftersale.fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -11,8 +9,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.adapter.NewWorkAdapter;
 import cherish.cn.huaweiaftersale.base.ApiHelper;
@@ -20,7 +16,6 @@ import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.bean.WorkBean;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
 import cherish.cn.huaweiaftersale.entity.OrderListDataEntity;
-import cherish.cn.huaweiaftersale.entity.OrderListEntity;
 import cherish.cn.huaweiaftersale.util.AppException;
 
 public class NewWorkOrderFragment extends BaseFragment implements DataCallback {

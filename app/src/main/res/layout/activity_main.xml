@@ -5,7 +5,10 @@
     android:layout_height="fill_parent"
     android:background="@color/bg_gray"
     android:orientation="vertical">
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorAccent" />
     <cherish.cn.huaweiaftersale.view.IndexViewPager
         android:id="@+id/main_container_vp"
         android:layout_width="fill_parent"

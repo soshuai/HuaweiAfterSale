@@ -67,7 +67,7 @@
         url="order/ajaxSaveFile" />
 
     <Node
-        class="java.lang.String"
+        class=".entity.OrderListEntity"
         id="@+id/api_savePosition"
         ids="api_savePosition"
         method="get"
