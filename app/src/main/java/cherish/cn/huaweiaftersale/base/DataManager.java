@@ -241,33 +241,32 @@ public final class DataManager {
     /**
      * 获取数据
      * @param context
-     * @param funcKey
      * @param callback
      */
-    public void submit(Context context, int funcKey, Map<String, String> params, DataCallback callback,Map<String, File> files) {
-        UrlData urlData = UrlConfigManager.getInstance().findURL(context, funcKey);
-        if (urlData == null || TextUtils.isEmpty(urlData.getReturnClass())) {
-            throw new IllegalArgumentException();
-        }
-        if (urlData.isNeedToken() && TextUtils.isEmpty(SecurityHolder.findSecurityData().getToken())) {
-            return;
-        }
-        synchronized (this.mUsedUrlMap) {
-            Integer usedCount = this.mUsedUrlMap.get(funcKey);
-            if (usedCount != null && usedCount.intValue() >= urlData.getCountLimit()) {
-                LogUtils.w("dataManager", "funcKey get count limit " + funcKey);
-                return;
-            }
-            this.mUsedUrlMap.put(funcKey, usedCount == null ? 1 : usedCount.intValue() + 1);
-        }
-
-        String jsonClass = urlData.getReturnClass().trim();
+    public void submit(Context context, String url, Map<String, String> params, DataCallback callback,Map<String, File> files) {
+//        UrlData urlData = UrlConfigManager.getInstance().findURL(context, funcKey);
+//        if (urlData == null || TextUtils.isEmpty(urlData.getReturnClass())) {
+//            throw new IllegalArgumentException();
+//        }
+//        if (urlData.isNeedToken() && TextUtils.isEmpty(SecurityHolder.findSecurityData().getToken())) {
+//            return;
+//        }
+//        synchronized (this.mUsedUrlMap) {
+//            Integer usedCount = this.mUsedUrlMap.get(funcKey);
+//            if (usedCount != null && usedCount.intValue() >= urlData.getCountLimit()) {
+//                LogUtils.w("dataManager", "funcKey get count limit " + funcKey);
+//                return;
+//            }
+//            this.mUsedUrlMap.put(funcKey, usedCount == null ? 1 : usedCount.intValue() + 1);
+//        }
+//
+//        String jsonClass = urlData.getReturnClass().trim();
 
         String result = "";
         VideoCheckDictEntity entity = null;
         Class<VideoCheckDictEntity> entityClass = VideoCheckDictEntity.class;
         try {
-            result = UploadUtil.post(urlData+"", params, files);
+            result = UploadUtil.post(url, params, files);
             if (TextUtils.isEmpty(result)) {
                 entity = entityClass.getDeclaredConstructor(Integer.class, String.class).newInstance(
                         BaseApiEntity.ERROR_CODE_NET, "网络异常");
@@ -286,7 +285,7 @@ public final class DataManager {
             } catch (Exception e1) {
             }
         }
-        Log.i("http url", urlData+"");
+        Log.i("http url", url+"");
         Log.i("http result", result);
     }
 }

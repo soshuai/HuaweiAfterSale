@@ -33,51 +33,18 @@ public class MyReceiver extends BroadcastReceiver {
             String json = bundle.getString(JPushInterface.EXTRA_MESSAGE);
             JSONObject jsonObject = JSON.parseObject(json);
             int type = jsonObject.getIntValue("type");
-            if (type == 2||type==4||type==5) {
-//                MessageHelper.receiveMessage(json);
-            }else if(type==3){
-                //有新潜客
-//                AppContext.getInstance().setShowFloatingMenu(true);
-//                EventBus.getDefault().post(new FloatingMenuEvent(true));//wangs
-            }else  if(type==1){
-//                NoticeEvent event = JSONObject.parseObject(json, NoticeEvent.class);
-//                ResidentNotificationHelper.sendDefaultNotice(context,"公告",event.getContent(), R.drawable.icon_toast);
-//                event.setContent(json);
-//                EventBus.getDefault().post(event);
-
-            }
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             String jsonString = bundle.getString(JPushInterface.EXTRA_EXTRA);
             LogUtils.d(TAG, "【MyReceiver】 接收到推送下来的通知: " + jsonString);
-//            MessageHelper.receiveMessage(jsonString);
-
-//            NoticeEvent event=JSONObject.parseObject(jsonString,NoticeEvent.class);
-//            TopToast.showText(context,event.getContent(), Toast.LENGTH_LONG);
-//            event.setContent(jsonString);
-//            EventBus.getDefault().post(event);
-            JSONObject jsonObject = JSON.parseObject(jsonString);
-            int type = jsonObject.getIntValue("type");
-            if (type == 1) {
-//                NoticeEvent event = JSONObject.parseObject(jsonString, NoticeEvent.class);
-//                ResidentNotificationHelper.sendDefaultNotice(context,"公告",event.getContent(), R.drawable.icon_toast);
-//                event.setContent(jsonString);
-//                EventBus.getDefault().post(event);
-            }else if(type==3){
-                //有新潜客
-//                AppContext.getInstance().setShowFloatingMenu(true);
-//                EventBus.getDefault().post(new FloatingMenuEvent(true));//wangs
-            }
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             //打开自定义的Activity
             Intent i;
             if (SecurityHelper.getInstance().findUserData().getUser() != null) {
                 i = new Intent(context, MainActivity.class);
             } else {
-//                i = new Intent(context, LoginActivity.class);
                 i = new Intent(context, MainActivity.class);
             }
             i.putExtras(bundle);
-            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(i);
 

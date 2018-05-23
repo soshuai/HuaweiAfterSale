@@ -42,7 +42,7 @@ public final class ApiHelper {
     }
 
     public static void submit(Context context, int funcKey, Map<String, String> params, DataCallback callback, Map<String, File> files) {
-        DataManager.getInstance().submit(context, funcKey, params, callback,files);
+        DataManager.getInstance().submit(context, getUrl(context,funcKey), params, callback,files);
 
     }
 

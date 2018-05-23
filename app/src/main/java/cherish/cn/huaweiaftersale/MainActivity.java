@@ -13,18 +13,26 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.AMapLocationQualityReport;
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.List;
+
+import cherish.cn.huaweiaftersale.base.ApiHelper;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.base.BaseMultiFragsActivity;
+import cherish.cn.huaweiaftersale.bean.WorkBean;
+import cherish.cn.huaweiaftersale.callback.DataCallback;
+import cherish.cn.huaweiaftersale.entity.OrderListDataEntity;
 import cherish.cn.huaweiaftersale.fragment.MineFragment;
 import cherish.cn.huaweiaftersale.fragment.OrderHandleFragment;
 import cherish.cn.huaweiaftersale.fragment.OrderSearchFragment;
 import cherish.cn.huaweiaftersale.jpush.JPushHelper;
 import cherish.cn.huaweiaftersale.util.AndroidGpsLocation;
+import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.DoubleClickExitHelper;
 import cherish.cn.huaweiaftersale.util.LogUtils;
 import cherish.cn.huaweiaftersale.util.Utils;
 
-public class MainActivity extends BaseMultiFragsActivity {
+public class MainActivity extends BaseMultiFragsActivity implements DataCallback{
     private MainPagerTabContext mTabContext[];
     private DoubleClickExitHelper mExitHelper;
     private int TAB_COUNT = 3;
@@ -133,6 +141,18 @@ public class MainActivity extends BaseMultiFragsActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onFailure(int funcKey, Bundle bundle, AppException appe) {
+
+    }
+
+    @Override
+    public void onSuccess(int funcKey, Bundle bundle, Object data) {
+        if (funcKey == R.id.api_savePosition) {
+            Log.i("AAAA",data.toString());
+        }
     }
 
 
@@ -257,8 +277,12 @@ public class MainActivity extends BaseMultiFragsActivity {
                 //解析定位结果，
                 String result = sb.toString();
 //                Log.i("AAAA",result);
+                Bundle bundle=new Bundle();
+                bundle.putString("longitude",location.getLongitude()+"");
+                bundle.putString("latitude",location.getLatitude()+"");
+                ApiHelper.load(mContext, R.id.api_savePosition, bundle, MainActivity.this);
             } else {
-//                Log.i("AAAA","定位失败，loc is null");
+                Log.i("AAAA","定位失败，loc is null");
             }
 
         }
