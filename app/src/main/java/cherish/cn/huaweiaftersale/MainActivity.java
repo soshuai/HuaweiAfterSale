@@ -256,9 +256,9 @@ public class MainActivity extends BaseMultiFragsActivity {
 
                 //解析定位结果，
                 String result = sb.toString();
-                Log.i("AAAA",result);
+//                Log.i("AAAA",result);
             } else {
-                Log.i("AAAA","定位失败，loc is null");
+//                Log.i("AAAA","定位失败，loc is null");
             }
 
         }

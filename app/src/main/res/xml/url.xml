@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <UrlConfig
     debug="false"
-    debugBaseHttp="http://121.40.63.64:80/jk_api/"
+    debugBaseHttp="http://192.168.10.55/jk_api/"
     debugBaseHttps=""
     defaultVersion="v1"
-    releaseBaseHttp="http://192.168.10.55/jk_api/"
+    releaseBaseHttp="http://osc.meeting365.com/huawei/"
     releaseBaseHttps=""
     signName="key"
     tokenName="token">
