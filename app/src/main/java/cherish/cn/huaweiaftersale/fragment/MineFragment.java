@@ -43,7 +43,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
                     @Override
                     public void run() {
                         refreshlayout.finishRefresh();
-                        refreshlayout.resetNoMoreData();
+                        refreshLayout.resetNoMoreData();
                     }
                 },2000);
             }
