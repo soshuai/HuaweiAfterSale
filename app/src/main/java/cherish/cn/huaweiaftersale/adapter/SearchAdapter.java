@@ -48,24 +48,19 @@ public class SearchAdapter extends BaseAdapter{
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.search_item, null);
             holder = new ViewHolder();
-//            holder.number = (TextView) convertView.findViewById(R.id.flow_name);
-//            holder.time = (TextView) convertView.findViewById(R.id.flow_online);
-//            holder.customer = (TextView) convertView.findViewById(R.id.sdv_flow);
-//            holder.location = (TextView) convertView.findViewById(R.id.ll_flow_info);
-//            holder.phone = (TextView) convertView.findViewById(R.id.ll_flow_info);
+            holder.number = (TextView) convertView.findViewById(R.id.tv_number);
+            holder.time = (TextView) convertView.findViewById(R.id.tv_progress);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        holder.number.setText("工单号："+list.get(position).getNumber());
+        holder.time.setText(list.get(position).getProgress());
         return convertView;
     }
 
     public final class ViewHolder {
         public TextView number;
         public TextView time;
-        public TextView customer;
-        public TextView location;
-        public TextView phone;
     }
 }

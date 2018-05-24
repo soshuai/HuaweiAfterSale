@@ -1,5 +1,6 @@
 package cherish.cn.huaweiaftersale.fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,7 +41,7 @@ public class NewWorkOrderFragment extends BaseFragment implements DataCallback {
                 noorder.setVisibility(View.GONE);
                 listView.setVisibility(View.VISIBLE);
                 Bundle bundle = new Bundle();
-                bundle.putInt("status", 0);
+                bundle.putInt("status", 1);
                 ApiHelper.load(mContext, R.id.api_order_list, bundle, context);
             }
         });
@@ -69,7 +70,6 @@ public class NewWorkOrderFragment extends BaseFragment implements DataCallback {
 
     @Override
     public void onFailure(int funcKey, Bundle bundle, AppException appe) {
-
     }
 
     @Override

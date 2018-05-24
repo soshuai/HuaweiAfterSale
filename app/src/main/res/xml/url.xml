@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <UrlConfig
-    debug="false"
-    debugBaseHttp="http://192.168.10.55/jk_api/"
+    debug="true"
+    debugBaseHttp="http://192.168.10.55/huawei/"
     debugBaseHttps=""
     defaultVersion="v1"
-    releaseBaseHttp="http://192.168.10.55/huawei/"
+    releaseBaseHttp="http://osc.meeting365.com/huawei/"
     releaseBaseHttps=""
     signName="key"
     tokenName="token">
-    <!--releaseBaseHttp="http://osc.meeting365.com/huawei/"-->
+    <!--releaseBaseHttp="http://192.168.10.55/huawei/"-->
     <!-- 获取客户端token -->
     <Node
         class="java.lang.String"

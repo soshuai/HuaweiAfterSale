@@ -6,6 +6,7 @@ import cherish.cn.huaweiaftersale.bean.BaseEntity;
  * Created by veryw on 2018/5/21.
  */
 
+
 public class OrderListDataEntity extends BaseEntity{
     private int minute;
 
@@ -61,12 +62,12 @@ public class OrderListDataEntity extends BaseEntity{
     public String getOrderCode(){
         return this.orderCode;
     }
-    public void setOrderDate(int orderDate){
-        this.orderDate = orderDate;
-    }
-    public int getOrderDate(){
-        return this.orderDate;
-    }
+//    public void setOrderDate(int orderDate){
+//        this.orderDate = orderDate;
+//    }
+//    public int getOrderDate(){
+//        return this.orderDate;
+//    }
     public void setUserMobile(String userMobile){
         this.userMobile = userMobile;
     }

@@ -73,9 +73,9 @@ public class MainActivity extends BaseMultiFragsActivity implements DataCallback
     protected void createPagerContext(View view) {
         mTabContext = new MainPagerTabContext[TAB_COUNT];
         // tab 1
-        mTabContext[0] = new MainPagerTabContext(OrderHandleFragment.class, R.id.tab_dynamic, R.string.tab_main_orderhandle, R.drawable.orderhandle, R.drawable.orderhandle);
-        mTabContext[1] = new MainPagerTabContext(OrderSearchFragment.class, R.id.tab_stores, R.string.tab_main_ordersearch, R.drawable.ordersearch, R.drawable.ordersearch);
-        mTabContext[2] = new MainPagerTabContext(MineFragment.class, R.id.tab_mine, R.string.tab_main_mine, R.drawable.person, R.drawable.person);
+        mTabContext[0] = new MainPagerTabContext(OrderHandleFragment.class, R.id.tab_dynamic, R.string.tab_main_orderhandle, R.drawable.orderhandle, R.drawable.orderhandle_two);
+        mTabContext[1] = new MainPagerTabContext(OrderSearchFragment.class, R.id.tab_stores, R.string.tab_main_ordersearch, R.drawable.ordersearch_two, R.drawable.ordersearch);
+        mTabContext[2] = new MainPagerTabContext(MineFragment.class, R.id.tab_mine, R.string.tab_main_mine, R.drawable.mine_two, R.drawable.person);
 
         for (int i = 0; i < mTabContext.length; i++) {
             MainPagerTabContext tabContext = mTabContext[i];

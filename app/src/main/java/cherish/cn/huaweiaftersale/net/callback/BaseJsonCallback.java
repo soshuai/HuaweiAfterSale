@@ -2,6 +2,7 @@ package cherish.cn.huaweiaftersale.net.callback;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -15,6 +16,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
+import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.DataManager;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
 import cherish.cn.huaweiaftersale.net.ErrorHandler;
@@ -77,6 +79,9 @@ public abstract class BaseJsonCallback implements Callback {
     public final void onResponse(Response response) throws IOException {
         // TODO Auto-generated method stub
         DataManager.getInstance().dataEnd(mFuncKey);
+//        if (mFuncKey== R.id.api_order_list){
+//            Log.i("ww","");
+//        }
         int responseCode = response.code();
         if (responseCode == 200) {
             String jsonResponse = response.body().string();

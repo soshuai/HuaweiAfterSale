@@ -23,6 +23,7 @@ import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.ApiHelper;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
+import cherish.cn.huaweiaftersale.jpush.JPushHelper;
 import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.SpfUtils;
 
@@ -65,6 +66,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
     @Override
     public void onSuccess(int funcKey, Bundle bundle, Object data) {
         if (funcKey == R.id.api_user_logout) {
+            JPushHelper.stopPush();
             Intent intent = new Intent(mContext, LoginActivity.class);
             startActivity(intent);
 //            SpfUtils.saveString(mContext, "loginCode", "");

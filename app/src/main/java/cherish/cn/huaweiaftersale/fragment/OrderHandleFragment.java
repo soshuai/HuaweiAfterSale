@@ -57,10 +57,10 @@ public class OrderHandleFragment extends BaseMultiFragsFragment implements View.
         mTabContexts = new MainPagerTabContext[mTabNum];
         // tab 1
         mTabContexts[0] = new MainPagerTabContext(NewWorkOrderFragment.class, R.id.item_main_tab1,
-                R.string.tab_new_work, R.drawable.news, R.drawable.news);
+                R.string.tab_new_work, R.drawable.news, R.drawable.new_two);
         // tab 2
         mTabContexts[1] = new MainPagerTabContext(RunningFragment.class, R.id.item_main_tab2, R.string.tab_running,
-                R.drawable.running, R.drawable.running);
+                R.drawable.running_two, R.drawable.running);
 
         for (int i = 0; i < mTabContexts.length; i++) {
             MainPagerTabContext tabContext = mTabContexts[i];

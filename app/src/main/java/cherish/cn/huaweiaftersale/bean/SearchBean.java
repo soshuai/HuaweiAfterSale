@@ -7,10 +7,12 @@ package cherish.cn.huaweiaftersale.bean;
 public class SearchBean {
     private String number;
     private String  progress;
+    private String recordId;
 
-    public SearchBean(String number, String progress) {
+    public SearchBean(String number, String progress, String recordId) {
         this.number = number;
         this.progress = progress;
+        this.recordId = recordId;
     }
 
     public String getNumber() {
@@ -27,5 +29,13 @@ public class SearchBean {
 
     public void setProgress(String progress) {
         this.progress = progress;
+    }
+
+    public String getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
     }
 }
