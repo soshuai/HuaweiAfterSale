@@ -3,6 +3,7 @@ package cherish.cn.huaweiaftersale.fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,12 +53,12 @@ public class OrderSearchFragment extends BaseFragment implements DataCallback{
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(final RefreshLayout refreshlayout) {
-                refreshlayout.getLayout().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+//                refreshlayout.getLayout().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
                         loadList();
-                    }
-                }, 1000);
+//                    }
+//                }, 1000);
             }
         });
         //触发自动刷新
@@ -68,10 +69,9 @@ public class OrderSearchFragment extends BaseFragment implements DataCallback{
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                String search=s.toString().toLowerCase().trim();
-                Bundle bundle = new Bundle();
-                bundle.putString("orderCode",search);
-                ApiHelper.load(mContext, R.id.api_order_list, bundle, context);
+                Log.i("AAAA","beforeTextChanged");
+                Log.i("AAAA",s.toString()+"=");
+                loadList();
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -94,17 +94,19 @@ public class OrderSearchFragment extends BaseFragment implements DataCallback{
 //        }
 //        adapter.notifyDataSetChanged();
         Bundle bundle = new Bundle();
-        ApiHelper.load(mContext, R.id.api_order_list, bundle, context);
+        bundle.putString("orderCode",editText.getText().toString().trim());
+        ApiHelper.load(mContext, R.id.api_order_list_three, bundle, context);
     }
 
     @Override
     public void onFailure(int funcKey, Bundle bundle, AppException appe) {
-
+        refreshLayout.finishRefresh();
+        refreshLayout.resetNoMoreData();
     }
 
     @Override
     public void onSuccess(int funcKey, Bundle bundle, Object data) {
-        if (funcKey == R.id.api_order_list) {
+        if (funcKey == R.id.api_order_list_three) {
             list.clear();
             List<OrderListDataEntity> entityList = (List<OrderListDataEntity>) data;
             for (int i = 0; i < entityList.size(); i++) {
@@ -114,10 +116,6 @@ public class OrderSearchFragment extends BaseFragment implements DataCallback{
             adapter.notifyDataSetChanged();
             refreshLayout.finishRefresh();
             refreshLayout.resetNoMoreData();
-//            if (list.size()<=0){
-//                noorder.setVisibility(View.VISIBLE);
-//                listView.setVisibility(View.GONE);
-//            }
         }
     }
 }

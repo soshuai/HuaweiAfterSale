@@ -242,7 +242,7 @@ public final class HttpManager {
         return url;
     }
 
-    private String createPostUrl(UrlData urlData) {
+    public String createPostUrl(UrlData urlData) {
         String url = makeFullUrl(urlData);
         if (urlData.isNeedToken()) {
             Map<String, String> pars = new HashMap(1);

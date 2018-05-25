@@ -1,5 +1,6 @@
 package cherish.cn.huaweiaftersale.net;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import cherish.cn.huaweiaftersale.base.AppContext;
@@ -22,6 +23,7 @@ public final class DefaultErrorHandler implements ErrorHandler {
      */
     @Override
     public void handleError(int funcKey, int result, String errorMsg) {
+        Log.i("AAAA","handleError"+errorMsg);
         if (result < 0) {
             if (result == -1) {
                 // 弹出对话框
@@ -29,8 +31,9 @@ public final class DefaultErrorHandler implements ErrorHandler {
                 final BaseActivity activity = AppManager.getInstance().currentActivity();
              //   DialogHelper.showLoginTimeoutDialog(activity, errorMsg);
             }
-        } else {
-            ToastHolder.showToast(AppContext.getInstance().getApplicationContext(), errorMsg, Toast.LENGTH_LONG);
         }
+//        else {
+            ToastHolder.showToast(AppContext.getInstance().getApplicationContext(), errorMsg, Toast.LENGTH_LONG);
+//        }
     }
 }

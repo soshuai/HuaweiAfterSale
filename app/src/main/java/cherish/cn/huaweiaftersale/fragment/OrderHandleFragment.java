@@ -1,6 +1,7 @@
 package cherish.cn.huaweiaftersale.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.base.BaseMultiFragsFragment;
+import cherish.cn.huaweiaftersale.event.CuntEvent;
 
-public class OrderHandleFragment extends BaseMultiFragsFragment implements View.OnClickListener{
+public class OrderHandleFragment extends BaseMultiFragsFragment implements View.OnClickListener {
     private MainPagerTabContext[] mTabContexts;
     private int mTabNum = 2;
     private View top;
@@ -22,6 +29,7 @@ public class OrderHandleFragment extends BaseMultiFragsFragment implements View.
 
     @Override
     protected void init(View view) {
+        EventBus.getDefault().register(this);
         inits(view);
     }
 
@@ -72,7 +80,7 @@ public class OrderHandleFragment extends BaseMultiFragsFragment implements View.
             tabContext.mTabText = (TextView) tabContext.mTab.findViewById(R.id.tv_main_tab);
             tabContext.mTabImg.setImageResource(tabContext.mResTabImageNor);
             tabContext.mTabText.setText(tabContext.mResTabName);
-            tabContext.line=(View)tabContext.mTab.findViewById(R.id.line);
+            tabContext.line = (View) tabContext.mTab.findViewById(R.id.line);
         }
     }
 
@@ -91,7 +99,7 @@ public class OrderHandleFragment extends BaseMultiFragsFragment implements View.
         this.mTabContexts[index].mTabImg.setImageResource(isFocus ? this.mTabContexts[index].mResTabImageOver
                 : this.mTabContexts[index].mResTabImageNor);
         this.mTabContexts[index].mTabText.setTextColor(isFocus ? this.getResources().getColor(R.color.colorAccent) : this.getResources().getColor(R.color.text_gray));
-        this.mTabContexts[index].line.setVisibility(isFocus?View.VISIBLE:View.GONE);
+        this.mTabContexts[index].line.setVisibility(isFocus ? View.VISIBLE : View.GONE);
 
     }
 
@@ -137,4 +145,14 @@ public class OrderHandleFragment extends BaseMultiFragsFragment implements View.
         super.onPageSelected(position);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(CuntEvent event) {
+        Log.i("AAAA", "Event=" + event.getCount());
+        if (event.isNew()) {
+            this.mTabContexts[0].mTabText.setText("新工单." + event.getCount());
+        } else {
+            this.mTabContexts[1].mTabText.setText("运行中." + event.getCount());
+
+        }
+    }
 }

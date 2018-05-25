@@ -105,6 +105,10 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.manage:
                 doSubmit();
+                Bundle bundle=new Bundle();
+                bundle.putString("status", "5");
+                bundle.putString("recordId", recordId);
+                ApiHelper.load(mContext, R.id.api_order_update, bundle, this);
                 break;
             default:
                 break;
@@ -304,6 +308,9 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
                 state.setText(info.getStatus());
                 id=info.getRecordId();
             }
+        }else if (funcKey == R.id.api_order_update){
+            manage.setText("已完成");
+            manage.setEnabled(false);
         }
     }
 }

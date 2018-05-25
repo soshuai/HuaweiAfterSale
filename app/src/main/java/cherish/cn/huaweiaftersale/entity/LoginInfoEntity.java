@@ -1,10 +1,6 @@
-package cherish.cn.huaweiaftersale.bean;
+package cherish.cn.huaweiaftersale.entity;
 
-/**
- * Created by Qianlp on 2017/2/15.
- */
-
-public class UserEntity extends BaseEntity {
+public class LoginInfoEntity {
     private int overtimes;
 
     private int over;
@@ -84,4 +80,5 @@ public class UserEntity extends BaseEntity {
     public String getMobile() {
         return this.mobile;
     }
+
 }

@@ -25,10 +25,12 @@ import cherish.cn.huaweiaftersale.util.TimeUtil;
 public class NewWorkAdapter extends BaseAdapter{
     private Context context;
     private List<WorkBean> list;
+    private AcceptOrNotListener listener;
     private LayoutInflater layoutInflater;
-    public NewWorkAdapter(Context context,List<WorkBean> list) {
+    public NewWorkAdapter(Context context,List<WorkBean> list,AcceptOrNotListener listener) {
         this.context = context;
         this.list = list;
+        this.listener=listener;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -74,20 +76,54 @@ public class NewWorkAdapter extends BaseAdapter{
             holder.location.setText(bean.getLocation());
             holder.states.setText(bean.getStates());
         }
+        final String states=bean.getState();
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.accept.setVisibility(View.GONE);
-                holder.refuse.setVisibility(View.GONE);
-                holder.manage.setVisibility(View.VISIBLE);
+//                holder.accept.setVisibility(View.GONE);
+//                holder.refuse.setVisibility(View.GONE);
+//                holder.manage.setVisibility(View.VISIBLE);
+                listener.update("2",bean.getRecordId());
             }
         });
+        holder.refuse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                holder.accept.setVisibility(View.GONE);
+//                holder.refuse.setVisibility(View.GONE);
+//                holder.manage.setVisibility(View.VISIBLE);
+                listener.update("4",bean.getRecordId());
+            }
+        });
+
+        if (states.equals("1")){
+            holder.accept.setVisibility(View.VISIBLE);
+            holder.refuse.setVisibility(View.VISIBLE);
+            holder.manage.setVisibility(View.GONE);
+        }else{
+            holder.accept.setVisibility(View.GONE);
+            holder.refuse.setVisibility(View.GONE);
+            holder.manage.setVisibility(View.VISIBLE);
+        }
+        if (states.equals("2")){//已接单
+            holder.manage.setText("已到达");
+        }else if (states.equals("3")){//已到达
+            holder.manage.setText("处理工单");
+        }else if (states.equals("4")){
+            holder.manage.setText("已拒绝");
+        }else if (states.equals("5")){
+            holder.manage.setText("已完成");
+        }
         holder.manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, ManageActivity.class);
-                intent.putExtra("recordId",bean.getRecordId());
-                context.startActivity(intent);
+                if (states.equals("2")){//已接单
+                    listener.update("3",bean.getRecordId());
+                }else if (states.equals("3")){//已到达
+                    Intent intent=new Intent(context, ManageActivity.class);
+                    intent.putExtra("recordId",bean.getRecordId());
+                    context.startActivity(intent);
+                }
             }
         });
         return convertView;
@@ -104,5 +140,9 @@ public class NewWorkAdapter extends BaseAdapter{
         public TextView accept;
         public TextView refuse;
         public TextView manage;
+    }
+
+    public interface AcceptOrNotListener{
+        public void update(String state,String recordId);
     }
 }

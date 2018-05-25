@@ -48,7 +48,9 @@ public abstract class BaseJsonCallback implements Callback {
     public void onEventMainThread(HttpSuccessEvent event) {
         if (event.getSenderHashCode() == this.hashCode() && event.getFuncKey() == mFuncKey) {
             unregisterMe();
-
+            if (mDataCallback==null){
+                Log.i("AAAA",event.getFuncKey()+" "+ event.getPars()+event.getData()+"");
+            }
                mDataCallback.onSuccess(event.getFuncKey(), event.getPars(), event.getData());
             mDataCallback = null;
         }

@@ -23,12 +23,12 @@ public final class JPushHelper {
 
     public static void setRegistrationId() {
         Log.e("channelId",JPushInterface.getRegistrationID(AppContext.getInstance())+"");
-        if (SecurityHelper.isLogin()) {
+//        if (SecurityHelper.isLogin()) {
             Bundle pars = new Bundle();
             pars.putString("deviceType", "6");
             pars.putString("channelId", JPushInterface.getRegistrationID(AppContext.getInstance()));
             ApiHelper.load(AppContext.getInstance(), R.id.api_set_push_channel, pars,null);
-        }
+//        }
     }
 
     public static void stopPush() {

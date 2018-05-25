@@ -9,10 +9,11 @@ import android.util.Log;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import org.greenrobot.eventbus.EventBus;
+
 import cherish.cn.huaweiaftersale.LoginActivity;
 import cherish.cn.huaweiaftersale.MainActivity;
-import cherish.cn.huaweiaftersale.R;
-import cherish.cn.huaweiaftersale.base.AppContext;
+import cherish.cn.huaweiaftersale.event.RefreshEvent;
 import cherish.cn.huaweiaftersale.util.LogUtils;
 import cherish.cn.huaweiaftersale.util.SecurityHelper;
 import cn.jpush.android.api.JPushInterface;
@@ -27,6 +28,7 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("veryw","接收到消息");
+        EventBus.getDefault().post(new RefreshEvent(true));
         Bundle bundle = intent.getExtras();
         String content = new String();
         if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {

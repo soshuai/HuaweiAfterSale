@@ -12,6 +12,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +24,11 @@ import cherish.cn.huaweiaftersale.LoginActivity;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.base.ApiHelper;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
+import cherish.cn.huaweiaftersale.bean.UserEntity;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
 import cherish.cn.huaweiaftersale.jpush.JPushHelper;
 import cherish.cn.huaweiaftersale.util.AppException;
+import cherish.cn.huaweiaftersale.util.SecurityHelper;
 import cherish.cn.huaweiaftersale.util.SpfUtils;
 
 public class MineFragment extends BaseFragment implements View.OnClickListener,DataCallback{
@@ -32,10 +36,25 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
     TextView logout;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.sign)
+    TextView sign;
+    @BindView(R.id.location)
+    TextView location;
+    @BindView(R.id.customer)
+    TextView customer;
+    @BindView(R.id.finish)
+    TextView finish;
+    @BindView(R.id.times)
+    TextView times;
     @Override
     protected void init(View view) {
         logout.setOnClickListener(this);
-
+        sign.setOnClickListener(this);
+        UserEntity user = SecurityHelper.findUserData().getUser();
+        customer.setText(user.getName());
+        location.setText(user.getAddress());
+        times.setText(user.getOvertimes()+"");
+        finish.setText(user.getOver()+"");
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -75,6 +94,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
 //            SpfUtils.saveString(getActivity(), "username", "");
 //            SpfUtils.saveString(getActivity(), "password", "");
             mContext.finish();
+        }else{//(funcKey == R.id.api_sign){
+            androidToast("打卡成功");
         }
     }
 
@@ -83,6 +104,9 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
         switch (v.getId()) {
             case R.id.logout:
                 ApiHelper.load(mContext, R.id.api_user_logout, this);
+                break;
+            case R.id.sign:
+                ApiHelper.load(mContext, R.id.api_sign, this);
                 break;
             default:
                  break;

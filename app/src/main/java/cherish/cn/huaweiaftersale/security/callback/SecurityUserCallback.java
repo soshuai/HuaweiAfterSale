@@ -63,7 +63,7 @@ public class SecurityUserCallback implements DataCallback {
           //  Toast.makeText(AppContext.getInstance(), jsonData, Toast.LENGTH_LONG).show();
             UserEntity user = JSON.parseObject(jsonData, UserEntity.class);
             SecurityHelper.findUserData().setUser(user);
-            LogUtils.d("loginCallback", user.getId() + "");
+            LogUtils.d("loginCallback", user.getOvertimes() + "");
             mCallback.onSuccess(funcKey, bundle, null);
             //在这里保存账号密码
 

@@ -1,10 +1,12 @@
 package cherish.cn.huaweiaftersale.base;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -60,6 +62,26 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void androidToast(String ss) {
         Toast.makeText(this, "" + ss, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showTip(String message){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+        dialog.setMessage(message);
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
 }

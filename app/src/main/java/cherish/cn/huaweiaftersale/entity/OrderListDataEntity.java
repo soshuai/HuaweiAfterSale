@@ -16,6 +16,8 @@ public class OrderListDataEntity extends BaseEntity{
 
     private String meetingName;
 
+    private String state;
+
     private String status;
 
     private String orderCode;
@@ -79,5 +81,13 @@ public class OrderListDataEntity extends BaseEntity{
     }
     public String getUserName(){
         return this.userName;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

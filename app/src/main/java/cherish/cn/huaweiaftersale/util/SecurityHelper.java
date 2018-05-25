@@ -45,7 +45,7 @@ public final class SecurityHelper {
 
     public static synchronized boolean isLogin() {
         SecurityUserEntity user = SecurityHelper.getInstance().getUserData();
-        return (user != null && user.getUser() != null && user.getUser().getId() > 0);
+        return (user != null && user.getUser() != null && user.getUser().getOvertimes() > 0);
     }
 
 //    public static void registerVCode(final Context context, final DataCallback callback, String mobile) {

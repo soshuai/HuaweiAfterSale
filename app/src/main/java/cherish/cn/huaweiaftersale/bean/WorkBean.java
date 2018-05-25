@@ -11,9 +11,10 @@ public class WorkBean {
     private String  customer;
     private String  phone;
     private String  states;
+    private String  state;
     private String  recordId;
 
-    public WorkBean(String number, int time, String location, String customer, String phone,String states,String recordId) {
+    public WorkBean(String number, int time, String location, String customer, String phone,String states,String recordId,String state) {
         this.number = number;
         this.time = time;
         this.location = location;
@@ -21,6 +22,7 @@ public class WorkBean {
         this.phone = phone;
         this.states=states;
         this.recordId=recordId;
+        this.state=state;
     }
 
     public String getNumber() {
@@ -65,5 +67,13 @@ public class WorkBean {
 
     public String getRecordId() {
         return recordId;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/interval_default"
-            android:text="已接单.进行中"
+            android:text=""
             android:textSize="12sp" />
     </RelativeLayout>
 
@@ -72,7 +72,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="三分钟前"
+                android:text=""
                 android:textColor="@color/black" />
 
             <View
@@ -109,7 +109,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="C13-1B03"
+                android:text=""
                 android:textColor="@color/black" />
 
             <View
@@ -146,7 +146,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="张玉凤"
+                android:text=""
                 android:textColor="@color/black" />
 
             <View
@@ -183,7 +183,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="13900000000"
+                android:text=""
                 android:textColor="@color/black" />
         </LinearLayout>
 

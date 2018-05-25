@@ -9,11 +9,15 @@
     android:orientation="vertical"
     android:padding="@dimen/interval_larger">
 
-
+    <ImageView
+        android:layout_marginTop="@dimen/interval_max_100"
+        android:src="@drawable/huawei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/interval_max_150">
+        android:layout_marginTop="@dimen/interval_max_50">
 
         <EditText
             android:id="@+id/account"

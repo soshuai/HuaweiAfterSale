@@ -52,7 +52,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/manage"
+                        android:id="@+id/sign"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/line1"
@@ -96,6 +96,7 @@
                                 android:textSize="@dimen/text_size_default" />
 
                             <TextView
+                                android:id="@+id/finish"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="25"
@@ -131,6 +132,7 @@
                                 android:textSize="@dimen/text_size_default" />
 
                             <TextView
+                                android:id="@+id/times"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="80"

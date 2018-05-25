@@ -1,24 +1,23 @@
 package cherish.cn.huaweiaftersale.entity;
 
 public class GetRecordInfo {
-    private int minute;
-
     private String recordId;
-
-    private String descp;
 
     private String meetingName;
 
-    private String status;
+    private String userMobile;
 
     private String orderCode;
 
-    private int orderDate;
-
-    private String userMobile;
-
     private String userName;
 
+    private int orderDate;
+
+    private int minute;
+
+    private String status;
+
+    private String descp;
     public void setMinute(int minute) {
         this.minute = minute;
     }
@@ -67,13 +66,13 @@ public class GetRecordInfo {
         return this.orderCode;
     }
 
-    public void setOrderDate(int orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public int getOrderDate() {
-        return this.orderDate;
-    }
+//    public void setOrderDate(int orderDate) {
+//        this.orderDate = orderDate;
+//    }
+//
+//    public int getOrderDate() {
+//        return this.orderDate;
+//    }
 
     public void setUserMobile(String userMobile) {
         this.userMobile = userMobile;
