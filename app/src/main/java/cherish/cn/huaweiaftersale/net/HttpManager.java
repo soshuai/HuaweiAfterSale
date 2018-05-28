@@ -2,6 +2,8 @@ package cherish.cn.huaweiaftersale.net;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
+
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
@@ -9,6 +11,7 @@ import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+
 import java.io.File;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -38,6 +41,7 @@ public final class HttpManager {
 
     /**
      * 通过http获取数据
+     *
      * @param context
      */
     private HttpManager(Context context) {
@@ -65,6 +69,7 @@ public final class HttpManager {
 
     /**
      * 上传文件，主要用于ocr
+     *
      * @param context
      * @param url
      * @param pars
@@ -109,6 +114,7 @@ public final class HttpManager {
 
     /**
      * 获取http 请求的url
+     *
      * @param context
      * @param urlData
      * @param pars
@@ -149,13 +155,15 @@ public final class HttpManager {
         return null;
     }
 
-    public void downloadFile(final Context context, String url, DownloadCallback callback){
+    public void downloadFile(final Context context, String url, DownloadCallback callback) {
         Request request = new Request.Builder().url(url).tag(context.getClass().getCanonicalName())
                 .build();
         mClient.newCall(request).enqueue(callback);
     }
+
     /**
      * 发送http请求
+     *
      * @param context
      * @param urlData
      * @param pars
@@ -174,29 +182,45 @@ public final class HttpManager {
             mClient.newCall(request).enqueue(callback);
         } else if (REQUEST_POST.equalsIgnoreCase(urlData.getMethod())) {
             FormEncodingBuilder builder = new FormEncodingBuilder();
-            Iterator<Entry<String, String>> it = pars.entrySet().iterator();
-            while (it.hasNext()) {
-                Entry<String, String> me = it.next();
-                if (me.getValue() == null) {
-                    continue;
-                }
-                String key = me.getKey();
-                if (key.startsWith("&")) {
-                    continue;
-                }
-                String value = me.getValue();
-                if (!TextUtils.isEmpty(urlData.getEncrypt()) && urlData.getEncrypt().contains(key)) {
-                    try {
-                        value = SecurityHolder.findSecurityData().getAesEncrypt().encrytorAsString(value, "utf8");
-                    } catch (Exception e) {
-                        throw new IllegalArgumentException("encrypt error");
+            Request request;
+            boolean json = urlData.isJson();
+            if (!json) {
+                Iterator<Entry<String, String>> it = pars.entrySet().iterator();
+                while (it.hasNext()) {
+                    Entry<String, String> me = it.next();
+                    if (me.getValue() == null) {
+                        continue;
                     }
+                    String key = me.getKey();
+                    if (key.startsWith("&")) {
+                        continue;
+                    }
+                    String value = me.getValue();
+                    if (!TextUtils.isEmpty(urlData.getEncrypt()) && urlData.getEncrypt().contains(key)) {
+                        try {
+                            value = SecurityHolder.findSecurityData().getAesEncrypt().encrytorAsString(value, "utf8");
+                        } catch (Exception e) {
+                            throw new IllegalArgumentException("encrypt error");
+                        }
+                    }
+                    builder.add(key, value);
                 }
-                builder.add(key, value);
+                request = new Request.Builder()
+                        .url(this.createPostUrl(urlData))
+                        .tag(context.getClass().getCanonicalName())
+                        .post(builder.build()).build();
+            } else {
+                String jsonString= "{\"type\":\"post json提交\"}";
+                request = new Request.Builder()
+                        .url(this.createPostUrl(urlData))
+                        .tag(context.getClass().getCanonicalName())
+                        .addHeader("content-type", "application/json;charset:utf-8")
+                        // 表单提交
+                        .put(RequestBody.create(
+                                MediaType.parse("application/json; charset=utf-8"),
+                                jsonString))// post json提交
+                        .build();
             }
-
-            Request request = new Request.Builder().url(this.createPostUrl(urlData)).tag(context.getClass().getCanonicalName())
-                    .post(builder.build()).build();
             LogUtils.i("httpManager", request.urlString());
             mClient.newCall(request).enqueue(callback);
         } else {
@@ -206,6 +230,7 @@ public final class HttpManager {
 
     /**
      * 设置完整的url
+     *
      * @param urlData
      * @return
      */
@@ -219,6 +244,7 @@ public final class HttpManager {
 
     /**
      * 添加url签名，保证url不会被篡改
+     *
      * @param urlData
      * @param url
      * @param pars
@@ -279,6 +305,7 @@ public final class HttpManager {
 
     /**
      * 分析所有的参数，并排序，保证生成的签名一致
+     *
      * @param urlData
      * @param pars
      * @return

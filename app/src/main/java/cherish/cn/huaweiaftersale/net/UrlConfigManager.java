@@ -75,24 +75,11 @@ public final class UrlConfigManager {
                                     throw new IllegalArgumentException();
                                 }
                                 int id = 0;
-//                                if (idAttr.startsWith("@+id/")) {
                                     String apiName = idAttr;
                                     checkApkName(apiName);
                                     id = context.getResources().getIdentifier(
                                             idAttr, "id",
                                             context.getPackageName());
-//                                } else if (idAttr.startsWith("@id/")) {
-//                                    String apiName = idAttr.subSequence(4, idAttr.length()).toString();
-//                                    checkApkName(apiName);
-//                                    id = context.getResources().getIdentifier(
-//                                            idAttr.subSequence(4, idAttr.length()).toString(), "id",
-//                                            context.getPackageName());
-//                                } else {
-//                                    id = xmlParser.getAttributeIntValue(null, "id", 0);
-//                                }
-//                                if (id == 0) {
-//                                    throw new IllegalArgumentException("id must NOT be zero");
-//                                }
                                 String url = xmlParser.getAttributeValue(null, "url");
                                 if (TextUtils.isEmpty(url)) {
                                     throw new IllegalArgumentException("url must NOT be null");
@@ -122,11 +109,13 @@ public final class UrlConfigManager {
                                     encrypt = null;
                                 }
 
+                                boolean json=xmlParser.getAttributeBooleanValue(null, "json", false);
+
                                 final UrlData urlData = new UrlData(id, url.trim(), method.toLowerCase(),
                                         xmlParser.getAttributeValue(null, "class"),
                                         apiVersion.trim(),
                                         xmlParser.getAttributeBooleanValue(null, "needToken", true),
-                                        xmlParser.getAttributeBooleanValue(null, "https", false), fullUrlFlag, encrypt, xmlParser.getAttributeIntValue(null, "count", 1));
+                                        xmlParser.getAttributeBooleanValue(null, "https", false), fullUrlFlag, encrypt, xmlParser.getAttributeIntValue(null, "count", 1),json);
                                 LogUtils.d("apiManager", urlData.toString());
                                 mUrlMapping.put(id, urlData);
                             }

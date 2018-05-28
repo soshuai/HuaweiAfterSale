@@ -10,6 +10,7 @@
     tokenName="token">
     <!--releaseBaseHttp="http://192.168.10.55/huawei/"-->
     <!-- 获取客户端token -->
+    <!--json="false" post json数据-->
     <Node
         class="java.lang.String"
         id="@+id/api_user_token"

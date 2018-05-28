@@ -10,13 +10,14 @@ public class UrlData {
     private String version;
     private int countLimit;
     private boolean needToken;
+    private boolean json;
     private boolean https;
     private String encrypt;
 
     private boolean fullUrl;
 
     public UrlData(int id, String url, String method, String returnClass,
-                   String version, boolean needToken, boolean https, boolean fullUrl, String encrypt, int countLimit) {
+                   String version, boolean needToken, boolean https, boolean fullUrl, String encrypt, int countLimit,boolean json) {
         super();
         this.id = id;
         this.url = url;
@@ -28,6 +29,7 @@ public class UrlData {
         this.fullUrl = fullUrl;
         this.encrypt = encrypt;
         this.countLimit = countLimit;
+        this.json=json;
     }
 
     public boolean isFullUrl() {
@@ -68,5 +70,9 @@ public class UrlData {
 
     public int getCountLimit() {
         return countLimit;
+    }
+
+    public boolean isJson() {
+        return json;
     }
 }
