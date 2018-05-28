@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.LoginActivity;
 import cherish.cn.huaweiaftersale.R;
+import cherish.cn.huaweiaftersale.UpdatePsdActivity;
 import cherish.cn.huaweiaftersale.base.ApiHelper;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.bean.UserEntity;
@@ -46,8 +47,11 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
     TextView finish;
     @BindView(R.id.times)
     TextView times;
+    @BindView(R.id.reset)
+    TextView reset;
     @Override
     protected void init(View view) {
+        reset.setOnClickListener(this);
         logout.setOnClickListener(this);
         sign.setOnClickListener(this);
         UserEntity user = SecurityHelper.findUserData().getUser();
@@ -107,6 +111,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
                 break;
             case R.id.sign:
                 ApiHelper.load(mContext, R.id.api_sign, this);
+                break;
+            case R.id.reset:
+                Intent intent=new Intent(mContext, UpdatePsdActivity.class);
+                startActivity(intent);
                 break;
             default:
                  break;
