@@ -20,9 +20,9 @@
         url="user/token" />
     <Node
         class="java.lang.String"
+        encrypt="loginInfo"
         id="@+id/api_user_login"
         ids="api_user_login"
-        encrypt="loginInfo"
         needToken="true"
         url="user/login" />
     <Node
@@ -100,10 +100,11 @@
         needToken="true"
         url="sign" />
     <Node
-        class=".entity.DefaultApiEntity"
+        class="java.lang.String"
         encrypt="password"
         id="@+id/api_update_psd"
         ids="api_update_psd"
         method="post"
+        needToken="true"
         url="user/updatePassword" />
 </UrlConfig>

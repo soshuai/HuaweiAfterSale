@@ -58,10 +58,7 @@ public class UpdatePsdActivity extends BaseActivity implements View.OnClickListe
             case R.id.submit:
                 String newPsd = mEtNewPsd.getText().toString();
                 String surePsd = mEtSurePsd.getText().toString();
-                Log.i("veryw", "ddd:" + SpfUtils.getString(mContext, "password"));
-                Log.i("veryw", "ddd:" + mTvOldPsd.getText());
                 if (mTvOldPsd.getText().toString().equals(SpfUtils.getString(mContext, "password"))) {
-                    Log.i("veryw", "dppp");
                     if (TextUtils.isEmpty(newPsd)) {
                         androidToast("新密码不能为空");
                         return;
@@ -78,13 +75,16 @@ public class UpdatePsdActivity extends BaseActivity implements View.OnClickListe
                         androidToast("两次密码输入不一致");
                         return;
                     }
-                    JSONObject json = new JSONObject();
-                    json.put("oldpwd", SpfUtils.getString(mContext, "password"));
-                    json.put("newpwd", newPsd);
+//                    JSONObject json = new JSONObject();
+//                    json.put("oldpwd", SpfUtils.getString(mContext, "password"));
+//                    json.put("newpwd", newPsd);
                     Bundle param = new Bundle();
-                    param.putString("password", json.toString());
+//                    param.putString("password", json.toString());
+                    param.putString("oldpwd", SpfUtils.getString(mContext, "password"));
+                    param.putString("newpwd", newPsd);
                     ApiHelper.load(mContext, R.id.api_update_psd, param, this);
                 } else {
+                    Log.i("AAAA",SpfUtils.getString(mContext, "password"));
                     androidToast("密码不正确");
                 }
 
@@ -100,6 +100,10 @@ public class UpdatePsdActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onSuccess(int funcKey, Bundle bundle, Object data) {
-
+        if (funcKey==R.id.api_update_psd){
+            androidToast("密码修改成功");
+            SpfUtils.saveString(mContext,"password",mEtNewPsd.getText().toString());
+            finish();
+        }
     }
 }
