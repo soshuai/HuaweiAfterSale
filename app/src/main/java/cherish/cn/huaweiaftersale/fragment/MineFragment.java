@@ -56,9 +56,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
         logout.setOnClickListener(this);
         sign.setOnClickListener(this);
         UserEntity user = SecurityHelper.findUserData().getUser();
+        Log.i("httpResponse",user.toString());
         customer.setText(user.getName());
         location.setText(user.getAddress());
-        times.setText(user.getOvertimes()+"");
+        times.setText(user.getOvertimes()+"s");
         finish.setText(user.getOver()+"");
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -112,6 +113,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
                 break;
             case R.id.sign:
                 ApiHelper.load(mContext, R.id.api_sign, this);
+                sign.setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_general_button_vv_black));
                 break;
             case R.id.reset:
                 Intent intent=new Intent(mContext, UpdatePsdActivity.class);

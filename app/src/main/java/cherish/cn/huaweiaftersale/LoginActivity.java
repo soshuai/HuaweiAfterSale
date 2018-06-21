@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +51,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     final static int PERMISSIONS_REQUEST_CODE = 12;
     private boolean isSave = true;//是否保存账户密码
     private LoginMoreAdapter adapter;
+//    private Handler mhandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +76,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
 
     private void init() {
+//        mhandler=new NoLeakHandler();
+//        HandlerThread thread=new HandlerThread("thread");
+//        thread.start();
+//        mhandler=new Handler(thread.getLooper()){
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//            }
+//        };
         morelist.setOnClickListener(this);
         login.setOnClickListener(this);
         list.add(new LoginMoreBean("13122626056", "123456"));
-        list.add(new LoginMoreBean("安妮海瑟薇", "123"));
         list.add(new LoginMoreBean("15555714326", "123456"));
-        list.add(new LoginMoreBean("尼尼", "123"));
-        list.add(new LoginMoreBean("15555714336", "123456"));
+        list.add(new LoginMoreBean("13855714336", "123456"));
         adapter = new LoginMoreAdapter(mContext, this, list);
         listView.setAdapter(adapter);
     }
@@ -106,13 +119,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void doLogin() {
         String loginCode = account.getText().toString();
         String pwd = password.getText().toString();
-
-        if (!(StringUtils.isEmpty(loginCode) || StringUtils.isEmpty(pwd))) {
+        if (TextUtils.isEmpty(loginCode)) {
+            androidToast("手机号不能为空");
+            return;
+        } else if (TextUtils.isEmpty(pwd)) {
+            androidToast("密码不能为空");
+            return;
+        } else if (!StringUtils.isMobile(loginCode)) {
+            androidToast("手机号码格式不正确");
+        } else {
             LoadingDialogUtils.createLoadingDialog(mContext, "正在登陆...");
             SecurityHelper.login(mContext, this, new LoginModel(loginCode, pwd));
-        } else {
-            androidToast("用户名和密码不能为空");
         }
+//        if (!(StringUtils.isEmpty(loginCode) || StringUtils.isEmpty(pwd))) {
+//            LoadingDialogUtils.createLoadingDialog(mContext, "正在登陆...");
+//            SecurityHelper.login(mContext, this, new LoginModel(loginCode, pwd));
+//        } else {
+//            androidToast("用户名和密码不能为空");
+//        }
     }
 
     @Override
@@ -137,6 +161,22 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             startActivity(intent);
             LoadingDialogUtils.closeDialog();
             finish();
+        }
+    }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mhandler.removeCallbacksAndMessages(null);
+//    }
+
+    private static class NoLeakHandler extends Handler{
+        public NoLeakHandler() {
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
         }
     }
 }

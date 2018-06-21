@@ -84,4 +84,18 @@ public class UserEntity extends BaseEntity {
     public String getMobile() {
         return this.mobile;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "overtimes=" + overtimes +
+                ", over=" + over +
+                ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", ability='" + ability + '\'' +
+                ", city='" + city + '\'' +
+                ", mobile='" + mobile + '\'' +
+                '}';
+    }
 }
