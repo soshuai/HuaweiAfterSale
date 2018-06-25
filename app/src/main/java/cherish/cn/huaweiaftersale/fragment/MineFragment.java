@@ -1,29 +1,19 @@
 package cherish.cn.huaweiaftersale.fragment;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import cherish.cn.huaweiaftersale.LoginActivity;
 import cherish.cn.huaweiaftersale.R;
 import cherish.cn.huaweiaftersale.UpdatePsdActivity;
-import cherish.cn.huaweiaftersale.WebViewActivity;
 import cherish.cn.huaweiaftersale.base.ApiHelper;
 import cherish.cn.huaweiaftersale.base.BaseFragment;
 import cherish.cn.huaweiaftersale.bean.UserEntity;
@@ -31,8 +21,6 @@ import cherish.cn.huaweiaftersale.callback.DataCallback;
 import cherish.cn.huaweiaftersale.jpush.JPushHelper;
 import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.SecurityHelper;
-import cherish.cn.huaweiaftersale.util.SpfUtils;
-
 public class MineFragment extends BaseFragment implements View.OnClickListener,DataCallback{
     @BindView(R.id.logout)
     TextView logout;
@@ -59,7 +47,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
         Log.i("httpResponse",user.toString());
         customer.setText(user.getName());
         location.setText(user.getAddress());
-        times.setText(user.getOvertimes()+"s");
+        float time= (float) user.getOvertimes()/3600;
+        DecimalFormat df = new DecimalFormat("0.0");//格式化小数，.后跟几个零代表几位小数
+        String s = df.format(time);
+        times.setText(s+"h");
         finish.setText(user.getOver()+"");
         refreshLayout.setEnableAutoLoadmore(true);//开启自动加载功能（非必须）
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -76,6 +67,10 @@ public class MineFragment extends BaseFragment implements View.OnClickListener,D
         });
         //触发自动刷新
         refreshLayout.autoRefresh();
+
+
+
+
     }
 
     @Override

@@ -88,7 +88,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         morelist.setOnClickListener(this);
         login.setOnClickListener(this);
         list.add(new LoginMoreBean("13122626056", "123456"));
-        list.add(new LoginMoreBean("15555714326", "123456"));
+        list.add(new LoginMoreBean("15555714336", "123456"));
         list.add(new LoginMoreBean("13855714336", "123456"));
         adapter = new LoginMoreAdapter(mContext, this, list);
         listView.setAdapter(adapter);

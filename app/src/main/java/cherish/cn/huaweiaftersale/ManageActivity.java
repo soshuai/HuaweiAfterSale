@@ -30,11 +30,15 @@ import cherish.cn.huaweiaftersale.bean.WorkBean;
 import cherish.cn.huaweiaftersale.callback.DataCallback;
 import cherish.cn.huaweiaftersale.entity.GetRecordInfo;
 import cherish.cn.huaweiaftersale.entity.OrderGetrecordDataEntity;
+import cherish.cn.huaweiaftersale.okhttp.entity.VideoCheckDictEntity;
+import cherish.cn.huaweiaftersale.okhttp.listener.TaskProcessListener;
+import cherish.cn.huaweiaftersale.task.SubmitTask;
 import cherish.cn.huaweiaftersale.util.AppException;
 import cherish.cn.huaweiaftersale.util.ImageUtils;
+import cherish.cn.huaweiaftersale.util.LoadingDialogUtils;
 import cherish.cn.huaweiaftersale.util.StringUtils;
 
-public class ManageActivity extends BaseActivity implements View.OnClickListener,DataCallback {
+public class ManageActivity extends BaseActivity implements View.OnClickListener, DataCallback, TaskProcessListener {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.top_custom_title)
@@ -44,7 +48,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     @BindView(R.id.tv_location)
     TextView location;
     @BindView(R.id.tv_name)
-    TextView  name;
+    TextView name;
     @BindView(R.id.tv_phone)
     TextView phone;
     @BindView(R.id.manage)
@@ -83,7 +87,7 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
         back.setOnClickListener(this);
         photo.setOnClickListener(this);
         title.setText("处理工单");
-        recordId=getIntent().getStringExtra("recordId");
+        recordId = getIntent().getStringExtra("recordId");
         Bundle bundle = new Bundle();
         bundle.putString("recordId", recordId);
         ApiHelper.load(mContext, R.id.api_order_getRecord, bundle, this);
@@ -105,10 +109,10 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.manage:
                 doSubmit();
-                Bundle bundle=new Bundle();
-                bundle.putString("status", "5");
-                bundle.putString("recordId", recordId);
-                ApiHelper.load(mContext, R.id.api_order_update, bundle, this);
+//                Bundle bundle=new Bundle();
+//                bundle.putString("status", "5");
+//                bundle.putString("recordId", recordId);
+//                ApiHelper.load(mContext, R.id.api_order_update, bundle, this);
                 break;
             default:
                 break;
@@ -116,29 +120,32 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void doSubmit() {
-        Map<String,File> files=new HashMap<>();
+        Map<String, File> files = new HashMap<>();
         for (int i = 0; i < imgList.size(); i++) {
             File file = new File(imgList.get(i));
             if (file.exists()) {
-                files.put(""+i,file);
+                files.put("" + i, file);
             }
         }
-        Map<String,String> map=new HashMap<>();
-        map.put("recordId",recordId);
-        ApiHelper.submit(mContext,R.id.api_order_ajaxSaveFile,map,this,files);
+        Map<String, String> map = new HashMap<>();
+        map.put("recordId", recordId);
+
+        SubmitTask checkTask = new SubmitTask(mContext, this, this, map, files);
+        checkTask.execute();
+        LoadingDialogUtils.createLoadingDialog(mContext,"正在上传");
     }
 
     private String getTime(int time) {
         //计算天 1天 = 24*60 1小时=60
-        int day = time/(24*60);
-        int hour = (time%(24*60))/60;
-        int minute = (time%(24*60))%60;
-        if (day>0){
-            return day+"天"+hour+"小时前";//+minute+"分钟前";
-        }else if (hour>0){
-            return hour+"小时前";//+minute+"分钟前";
-        }else{
-            return minute+"分钟前";
+        int day = time / (24 * 60);
+        int hour = (time % (24 * 60)) / 60;
+        int minute = (time % (24 * 60)) % 60;
+        if (day > 0) {
+            return day + "天" + hour + "小时前";//+minute+"分钟前";
+        } else if (hour > 0) {
+            return hour + "小时前";//+minute+"分钟前";
+        } else {
+            return minute + "分钟前";
         }
     }
 
@@ -169,14 +176,15 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
             setImg(imgList.get(0), img1);
             if (imgList.size() > 1) {
                 setImg(imgList.get(1), img2);
-                if (imgList.size() >2) {
+                if (imgList.size() > 2) {
                     setImg(imgList.get(2), img3);
-                    if (imgList.size()>3)
+                    if (imgList.size() > 3)
                         setImg(imgList.get(3), img4);
                 }
             }
         }
     }
+
     private void setImg(String path, ImageView img) {
         File file = new File(path);
         if (file.exists()) {
@@ -291,26 +299,42 @@ public class ManageActivity extends BaseActivity implements View.OnClickListener
         int point = fileName.lastIndexOf('.');
         return fileName.substring(point + 1);
     }
+
     @Override
-    public void onFailure(int funcKey, Bundle bundle, AppException appe) {}
+    public void onFailure(int funcKey, Bundle bundle, AppException appe) {
+    }
 
     @Override
     public void onSuccess(int funcKey, Bundle bundle, Object data) {
-        if (funcKey==R.id.api_order_getRecord){
-            List<OrderGetrecordDataEntity> list= (List<OrderGetrecordDataEntity>) data;
-            OrderGetrecordDataEntity entity=list.get(0);
-            GetRecordInfo info=entity.getInfo();
-            if (info!=null){
+        if (funcKey == R.id.api_order_getRecord) {
+            List<OrderGetrecordDataEntity> list = (List<OrderGetrecordDataEntity>) data;
+            OrderGetrecordDataEntity entity = list.get(0);
+            GetRecordInfo info = entity.getInfo();
+            if (info != null) {
                 name.setText(info.getUserName());
                 phone.setText(info.getUserMobile());
                 time.setText(getTime(info.getMinute()));
                 location.setText(info.getMeetingName());
                 state.setText(info.getStatus());
-                id=info.getRecordId();
+                id = info.getRecordId();
             }
-        }else if (funcKey == R.id.api_order_update){
+        } else if (funcKey == R.id.api_order_update) {
             manage.setText("已完成");
             manage.setEnabled(false);
+        } else if (funcKey == R.id.api_order_ajaxSaveFile) {
+            VideoCheckDictEntity entity = (VideoCheckDictEntity) data;
+            String message = entity.getMessage();
+            if (message != null && !StringUtils.isEmpty(message))
+                androidToast(message);
+
+            LoadingDialogUtils.closeDialog();
         }
     }
+
+    @Override
+    public void onComplete(Object... params) throws AppException {}
+    @Override
+    public void onFailed(Object... params) throws AppException {}
+    @Override
+    public void onSuccess(Object... params) throws AppException {}
 }

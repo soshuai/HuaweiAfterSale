@@ -243,7 +243,7 @@ public final class DataManager {
      * @param context
      * @param callback
      */
-    public void submit(Context context, String url, Map<String, String> params, DataCallback callback,Map<String, File> files) {
+    public void submit(Context context, int funcKey,String url, Map<String, String> params, DataCallback callback,Map<String, File> files) {
 //        UrlData urlData = UrlConfigManager.getInstance().findURL(context, funcKey);
 //        if (urlData == null || TextUtils.isEmpty(urlData.getReturnClass())) {
 //            throw new IllegalArgumentException();
@@ -287,5 +287,6 @@ public final class DataManager {
         }
         Log.i("http url", url+"");
         Log.i("http result", result);
+        callback.onSuccess(funcKey,null,entity);
     }
 }

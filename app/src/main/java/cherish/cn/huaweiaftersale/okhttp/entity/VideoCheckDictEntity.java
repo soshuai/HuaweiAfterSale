@@ -1,25 +1,29 @@
 package cherish.cn.huaweiaftersale.okhttp.entity;
 
+import java.util.List;
+
 /**
  * Created by veryw on 2018/5/9.
  */
 
 public class VideoCheckDictEntity {
+
+    /**
+     * result : 0
+     * message : success
+     * dataList : [{"name":"d94ced9f4aaf4c25b48b1d205fc6845620180625164823.jpg","url":"upload/20180625/20180625164837HERG1T8Y.jpg"}]
+     */
+
+    private int result;
     private String message;
-    private DataBean data;
-    private String respCode;
-    private boolean ok;
+    private List<DataListBean> dataList;
 
-//    public VideoCheckDictEntity(Integer result, String msg) {
-//        super(result, msg);
-//    }
+    public int getResult() {
+        return result;
+    }
 
-
-    public VideoCheckDictEntity(String message, DataBean data, String respCode, boolean ok) {
-        this.message = message;
-        this.data = data;
-        this.respCode = respCode;
-        this.ok = ok;
+    public void setResult(int result) {
+        this.result = result;
     }
 
     public String getMessage() {
@@ -30,27 +34,37 @@ public class VideoCheckDictEntity {
         this.message = message;
     }
 
-    public String getRespCode() {
-        return respCode;
+    public List<DataListBean> getDataList() {
+        return dataList;
     }
 
-    public void setRespCode(String respCode) {
-        this.respCode = respCode;
+    public void setDataList(List<DataListBean> dataList) {
+        this.dataList = dataList;
     }
 
-    public boolean isOk() {
-        return ok;
-    }
+    public static class DataListBean {
+        /**
+         * name : d94ced9f4aaf4c25b48b1d205fc6845620180625164823.jpg
+         * url : upload/20180625/20180625164837HERG1T8Y.jpg
+         */
 
-    public void setOk(boolean ok) {
-        this.ok = ok;
-    }
+        private String name;
+        private String url;
 
-    public DataBean getData() {
-        return data;
-    }
+        public String getName() {
+            return name;
+        }
 
-    public void setData(DataBean data) {
-        this.data = data;
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 }

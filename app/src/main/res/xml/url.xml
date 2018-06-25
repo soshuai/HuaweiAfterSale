@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <UrlConfig
-    debug="false"
+    debug="true"
     debugBaseHttp="http://192.168.10.55/huawei/"
     debugBaseHttps=""
     defaultVersion="v1"
